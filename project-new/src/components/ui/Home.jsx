@@ -66,7 +66,7 @@ export default function Home() {
   const sm=useTransform(progress3,[0,1],[0,-90])
 
   return (
-    <div className="flex flex-col justify-start items-center w-full h-full border border-green-900">
+    <div className="flex flex-col justify-start items-center w-full h-full">
       <div className="flex flex-col w-full h-[80vh] mt-[20vh] justify-center items-center bg-black dark:bg-black bg-dot-white/[0.2] dark:bg-dot-white/[0.2] relative">
         {/* Radial gradient for the background effect */}
         <div className="absolute inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
@@ -197,7 +197,7 @@ export default function Home() {
       <Separator className="my-4 w-[80%] bg-zinc-800 mt-16" />
 
 
-      <div className="h-[190vh] relative w-full flex flex-col items-center justify-start border border-red-600">
+      <motion.div className="h-[190vh] relative w-full flex flex-col items-center justify-start">
         <motion.h2 style={{y:sm}} className="scroll-m-20 pb-2 text-white text-5xl font-semibold tracking-tight mt-16 mb-3 ">
           Discover Our Artistic Community
         </motion.h2>
@@ -223,7 +223,7 @@ export default function Home() {
             gradientColor="#262626"
           >Text3</MagicCard>
         </motion.div>
-      </div>
+      </motion.div>
     </div>
   );
 }
