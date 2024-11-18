@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Geist";
+  background-color: black;
+}
+/* styles.css */
+.NavigationMenuIndicator {
+	background-color: black;
+}
+.NavigationMenuIndicator[data-orientation="horizontal"] {
+	height: 3px;
+	transition:
+		width,
+		transform,
+		250ms ease;
+}
+@layer base {
+  :root {
+    --color-1:0 100% 63%;
+    --color-2:270 100% 63%;
+    --color-3:210 100% 63%;
+    --color-4:195 100% 63%;
+    --color-5:90 100% 63%;
+  }
+  .dark {
+    --color-1:0 100% 63%;
+    --color-2:270 100% 63%;
+    --color-3:210 100% 63%;
+    --color-4:195 100% 63%;
+    --color-5:90 100% 63%;
+  }
+}
+
