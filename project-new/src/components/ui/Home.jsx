@@ -12,14 +12,13 @@ import { Container } from "postcss";
 import AvatarCircles from "./AvatarCircles";
 import { MagicCard } from "./magic-card";
 import { black } from "tailwindcss/colors";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Home() {
   useEffect(() => {
     // Initialize Lenis
     const lenis = new Lenis({
-      smoothWheel:true
+      smoothWheel: true,
     });
 
     // Listen for the scroll event and log the event data
@@ -54,16 +53,16 @@ export default function Home() {
 
   console.log(featuresScale);
 
-  const artistsContainer=useRef(null);
+  const artistsContainer = useRef(null);
 
-  const {scrollYProgress:progress3}=useScroll({
-    target:artistsContainer,
-    offset:['start end','end start']
-  })
+  const { scrollYProgress: progress3 } = useScroll({
+    target: artistsContainer,
+    offset: ["start end", "end start"],
+  });
 
-  const lg=useTransform(progress3,[0,1],[0,-130])
-  const md=useTransform(progress3,[0,1],[0,-100])
-  const sm=useTransform(progress3,[0,1],[0,-90])
+  const lg = useTransform(progress3, [0, 1], [0, -130]);
+  const md = useTransform(progress3, [0, 1], [0, -100]);
+  const sm = useTransform(progress3, [0, 1], [0, -90]);
 
   return (
     <div className="flex flex-col justify-start items-center w-full h-full">
@@ -196,9 +195,11 @@ export default function Home() {
       </motion.div>
       <Separator className="my-4 w-[80%] bg-zinc-800 mt-16" />
 
-
       <motion.div className="h-[190vh] relative w-full flex flex-col items-center justify-start">
-        <motion.h2 style={{y:sm}} className="scroll-m-20 pb-2 text-white text-5xl font-semibold tracking-tight mt-16 mb-3 ">
+        <motion.h2
+          style={{ y: sm }}
+          className="scroll-m-20 pb-2 text-white text-5xl font-semibold tracking-tight mt-16 mb-3 "
+        >
           Discover Our Artistic Community
         </motion.h2>
         <p className="text-sm text-zinc-400 text-center mb-7">
@@ -206,22 +207,50 @@ export default function Home() {
           creativity and innovation.
         </p>
         <AvatarCircles />
-        <motion.div ref={artistsContainer} className="flex justify-center items-center w-[90%] h-[500px] gap-20 mt-10">
+        <motion.div
+          ref={artistsContainer}
+          className="flex justify-center items-center w-[90%] h-[500px] gap-20 mt-6"
+        >
           <MagicCard
             style={md}
-            className="cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl bg-zinc-900 w-[20%] h-[60%] border-zinc-700 shadow-zinc-800 shadow-3d transform hover:translate-y-[-2px] transition-all duration-300"
+            className="cursor-pointer flex-col items-center justify-start p-3 whitespace-nowrap text-4xl bg-zinc-900 w-[20%] h-[60%] border-zinc-700 shadow-zinc-800 shadow-3d"
             gradientColor="#262626"
-          >Text</MagicCard>
+          >
+            <div className="w-full  flex justify-center items-center gap-3 border border-red-600">
+              <Avatar className="z-[-3] blur-0">
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div className="flex flex-col  leading-tight">
+                <h5 className="text-sm leading-none text-white font-medium">
+                  Anuka Samuditha
+                </h5>
+                <h5 className="text-xs leading-none text-zinc-700">
+                  Digital Illustrator
+                </h5>
+              </div>
+            </div>
+            <p className="text-white text-xs text-justify border border-red-700 w-full h-[90%]">
+              Arteora is a breath of fresh air for artists like me! The platform
+              has given me a space to showcase my work and connect with fellow
+              creatives. The design is sleek, and the tools are easy to use.
+              Highly recommended
+            </p>
+          </MagicCard>
           <MagicCard
             style={lg}
-            className="cursor-pointer flex-col items-center justify-center whitespace-nowrap bg-zinc-900 text-4xl dark:bg-[#262626] w-[22%] h-[70%] border-zinc-700 shadow-zinc-800 shadow-3d transform hover:translate-y-[-2px] transition-all duration-300"
+            className="cursor-pointer flex-col items-center justify-center  bg-zinc-900 text-4xl dark:bg-[#262626] w-[22%] h-[70%] border-zinc-700 shadow-zinc-800 shadow-3d "
             gradientColor="#262626"
-          >Text2</MagicCard>
+          >
+            Text2
+          </MagicCard>
           <MagicCard
             style={sm}
-            className="cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl bg-zinc-900 w-[20%] h-[60%] border border-zinc-700 shadow-zinc-800 shadow-3d transform hover:translate-y-[-2px] transition-all duration-300"
+            className="cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl bg-zinc-900 w-[20%] h-[60%] border border-zinc-700 shadow-zinc-800 shadow-3d"
             gradientColor="#262626"
-          >Text3</MagicCard>
+          >
+            Text3
+          </MagicCard>
         </motion.div>
       </motion.div>
     </div>
