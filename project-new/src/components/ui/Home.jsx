@@ -12,6 +12,7 @@ import AvatarCircles from "./AvatarCircles";
 import { MagicCard } from "./magic-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ImagesColumn from "./ImagesColumn";
+import { useNavigate } from "react-router-dom";
 import image1 from '../../Images/Image2.jpg';
 import image2 from '../../Images/image2.jpg';
 import image3 from '../../Images/image3.jpg';
@@ -31,6 +32,7 @@ import image14 from '../../Images/Image14.jpg';
 
 export default function Home() {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+  const navigate=useNavigate();
 
   useEffect(() => {
     const handleResize = () => setWindowHeight(window.innerHeight);
@@ -101,6 +103,11 @@ export default function Home() {
 
  const ImageUrls=[image1,image2,image3,image4,image5,image6,image7,image8,image9,image10,image11,image12,image13,image14];
 
+ function forwardSignup(){
+  navigate('/signup');
+
+ }
+
   return (
     <div className="flex flex-col justify-start items-center w-full h-full">
       <div className="flex flex-col w-full h-[80vh] mt-[20vh] justify-center items-center bg-black dark:bg-black bg-dot-white/[0.2] dark:bg-dot-white/[0.2] relative">
@@ -119,6 +126,7 @@ export default function Home() {
         <div className="flex justify-center items-center w-[300px] h-[80px] gap-5 relative z-10">
           <Button
             variant="destructive"
+            onClick={forwardSignup}
             className="bg-green-400 text-black rounded-[8px] w-[110px] font-[500] hover:bg-green-400"
           >
             Get Started
