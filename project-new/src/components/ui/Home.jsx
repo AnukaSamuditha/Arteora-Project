@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef,useState } from "react";
 import { Button } from "@/components/ui/button";
 import { MarqueeDemo } from "./ArtworksMarquee";
 import { SafariDemo } from "./SafariDemo";
@@ -8,13 +8,36 @@ import Lenis from "lenis";
 import { Drama, User } from "lucide-react";
 import { ShieldCheck } from "lucide-react";
 import ShineBorder from "./shine-border";
-import { Container } from "postcss";
 import AvatarCircles from "./AvatarCircles";
 import { MagicCard } from "./magic-card";
-import { black } from "tailwindcss/colors";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ImagesColumn from "./ImagesColumn";
+import image1 from '../../Images/Image2.jpg';
+import image2 from '../../Images/image2.jpg';
+import image3 from '../../Images/image3.jpg';
+import image4 from '../../Images/image4.jpg';
+import image5 from '../../Images/image5.jpg';
+import image6 from '../../Images/image5.jpg';
+import image7 from '../../Images/image6.jpg';
+import image8 from '../../Images/image8.jpg';
+import image9 from '../../Images/image9.jpg';
+import image10 from '../../Images/image10.jpg';
+import image11 from '../../Images/Image11.jpg';
+import image12 from '../../Images/Image12.jpg';
+import image13 from '../../Images/Image13.jpg';
+import image14 from '../../Images/Image14.jpg';
+
+
 
 export default function Home() {
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+  useEffect(() => {
+    const handleResize = () => setWindowHeight(window.innerHeight);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     // Initialize Lenis
     const lenis = new Lenis({
@@ -37,6 +60,7 @@ export default function Home() {
 
   const ref = useRef(null);
   const featuresContainer = useRef(null);
+  const artsContainer=useRef(null);
 
   const { scrollYProgress: progress1 } = useScroll({
     target: ref,
@@ -48,8 +72,19 @@ export default function Home() {
     offset: ["start end", "start center"],
   });
 
+  const {scrollYProgress : progress4} = useScroll({
+    target:artsContainer,
+    offset:['start end','end start']
+  })
+
   const scaleValue = useTransform(progress1, [0, 0.7, 1], [0.7, 1, 0.7]);
   const featuresScale = useTransform(progress2, [0, 1], [0, 1]);
+
+  const y1=useTransform(progress4,[0,1],[0,windowHeight * 4.3]);
+  const y2=useTransform(progress4,[0,1],[0,windowHeight * 3.5]);
+  const y3=useTransform(progress4,[0,1],[0,windowHeight *4.5]);
+  const y4=useTransform(progress4,[0,1],[0,windowHeight * 4.1]);
+
 
   console.log(featuresScale);
 
@@ -63,6 +98,8 @@ export default function Home() {
   const lg = useTransform(progress3, [0, 1], [0, -130]);
   const md = useTransform(progress3, [0, 1], [0, -100]);
   const sm = useTransform(progress3, [0, 1], [0, -90]);
+
+ const ImageUrls=[image1,image2,image3,image4,image5,image6,image7,image8,image9,image10,image11,image12,image13,image14];
 
   return (
     <div className="flex flex-col justify-start items-center w-full h-full">
@@ -195,7 +232,7 @@ export default function Home() {
       </motion.div>
       <Separator className="my-4 w-[80%] bg-zinc-800 mt-16" />
 
-      <motion.div className="h-[190vh] relative w-full flex flex-col items-center justify-start">
+      <motion.div className="h-[130vh] relative w-full flex flex-col items-center justify-start">
         <motion.h2
           style={{ y: sm }}
           className="scroll-m-20 pb-2 text-white text-5xl font-semibold tracking-tight mt-16 mb-3 "
@@ -213,46 +250,95 @@ export default function Home() {
         >
           <MagicCard
             style={md}
-            className="cursor-pointer flex-col items-center justify-start p-3 whitespace-nowrap text-4xl bg-zinc-900 w-[20%] h-[60%] border-zinc-700 shadow-zinc-800 shadow-3d"
+            className="cursor-pointer flex-col items-center justify-start p-3 text-4xl bg-zinc-900 w-[20%] h-[60%] border-zinc-700 shadow-zinc-800 shadow-3d"
             gradientColor="#262626"
           >
-            <div className="w-full  flex justify-center items-center gap-3 border border-red-600">
-              <Avatar className="z-[-3] blur-0">
+            <div className="w-full h-[35%] flex justify-center items-center gap-3 mb-4">
+              <Avatar className="z-[-3] blur-0 w-[5rem] h-[5rem]">
                 <AvatarImage src="https://github.com/shadcn.png" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <div className="flex flex-col  leading-tight">
-                <h5 className="text-sm leading-none text-white font-medium">
+            </div>
+            <h5 className="text-sm leading-none text-white font-medium text-center">
                   Anuka Samuditha
                 </h5>
-                <h5 className="text-xs leading-none text-zinc-700">
+                <h5 className="text-xs leading-none text-zinc-700 text-center">
                   Digital Illustrator
                 </h5>
-              </div>
-            </div>
-            <p className="text-white text-xs text-justify border border-red-700 w-full h-[90%]">
-              Arteora is a breath of fresh air for artists like me! The platform
+            <p className="text-white text-xs text-justify w-full h-[50%] italic mt-5">
+              "Arteora is a breath of fresh air for artists like me! The platform
               has given me a space to showcase my work and connect with fellow
               creatives. The design is sleek, and the tools are easy to use.
-              Highly recommended
+              Highly recommended"
             </p>
           </MagicCard>
           <MagicCard
             style={lg}
-            className="cursor-pointer flex-col items-center justify-center  bg-zinc-900 text-4xl dark:bg-[#262626] w-[22%] h-[70%] border-zinc-700 shadow-zinc-800 shadow-3d "
+            className="cursor-pointer flex-col items-center justify-start p-3 bg-zinc-900 text-4xl dark:bg-[#262626] w-[22%] h-[70%] border-zinc-700 shadow-zinc-800 shadow-3d "
             gradientColor="#262626"
           >
-            Text2
+            <div className="w-full h-[35%] flex justify-center items-center gap-3 mb-4">
+              <Avatar className="z-[-3] blur-0 w-[5rem] h-[5rem]">
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </div>
+            <h5 className="text-sm leading-none text-white font-medium text-center">
+                  Anuka Samuditha
+                </h5>
+                <h5 className="text-xs leading-none text-zinc-700 text-center">
+                  Digital Illustrator
+                </h5>
+            <p className="text-white text-xs text-justify w-full h-[50%] italic mt-5">
+              "Arteora is a breath of fresh air for artists like me! The platform
+              has given me a space to showcase my work and connect with fellow
+              creatives. The design is sleek, and the tools are easy to use.
+              Highly recommended"
+            </p>
           </MagicCard>
           <MagicCard
             style={sm}
-            className="cursor-pointer flex-col items-center justify-center whitespace-nowrap text-4xl bg-zinc-900 w-[20%] h-[60%] border border-zinc-700 shadow-zinc-800 shadow-3d"
+            className="cursor-pointer flex-col items-center justify-start p-3 text-4xl bg-zinc-900 w-[20%] h-[60%] border border-zinc-700 shadow-zinc-800 shadow-3d"
             gradientColor="#262626"
           >
-            Text3
+            <div className="w-full h-[35%] flex justify-center items-center gap-3 mb-4">
+              <Avatar className="z-[-3] blur-0 w-[5rem] h-[5rem]">
+                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+            </div>
+            <h5 className="text-sm leading-none text-white font-medium text-center">
+                  Anuka Samuditha
+                </h5>
+                <h5 className="text-xs leading-none text-zinc-700 text-center">
+                  Digital Illustrator
+                </h5>
+            <p className="text-white text-xs text-justify w-full h-[50%] italic mt-5">
+              "Arteora is a breath of fresh air for artists like me! The platform
+              has given me a space to showcase my work and connect with fellow
+              creatives. The design is sleek, and the tools are easy to use.
+              Highly recommended"
+            </p>
           </MagicCard>
         </motion.div>
       </motion.div>
+      <Separator className="my-4 w-[80%] bg-zinc-800 " />
+      <h2 className="scroll-m-20 pb-2 text-white text-5xl font-semibold tracking-tight first:mt-0 mt-14 ">
+        Variety of Creative Works
+      </h2>
+      <p className="text-sm text-zinc-400 text-center mb-7 w-[60%]"> 
+      Arteora offers a rich collection of artistic creations, from digital masterpieces to traditional sculptures. Discover unique styles and expressions that inspire and captivate.
+        </p>
+      <div className="h-[10vh]"></div>
+      <div ref={artsContainer} className="w-[90%] h-[185vh] relative overflow-hidden flex justify-center items-center p-4 gap-4">
+        <ImagesColumn Image1={ImageUrls[0]} Image2={ImageUrls[13]} Image3={ImageUrls[12]} Y={y1}/>
+        <ImagesColumn Image1={ImageUrls[3]} Image2={ImageUrls[1]} Image3={ImageUrls[2]} Y={y2}/>
+        <ImagesColumn Image1={ImageUrls[6]} Image2={ImageUrls[7]} Image3={ImageUrls[8]} Y={y3}/>
+        <ImagesColumn Image1={ImageUrls[9]} Image2={ImageUrls[10]} Image3={ImageUrls[11]} Y={y4}/>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black dark:from-background"></div>
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black dark:from-background"></div>
+      </div>
+      <div className="h-[100vh]"></div>
     </div>
   );
 }
