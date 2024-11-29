@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
 import { ButtonWithIcon } from "./ButtonWithIcon";
+import { AlignJustify } from "lucide-react";
 
 
 export default function NavBar() {
@@ -57,11 +58,14 @@ export default function NavBar() {
       
       
   return (
-    <header className="flex fixed z-[100] w-full h-[60px] justify-center items-center border-b border-zinc-800 backdrop-blur bg-transparent ">
-      <div className="flex justify-center items-center w-[15%] h-[100%] ">
+    <header className="flex sticky top-0 z-[100] w-full h-[60px] justify-between lg:justify-center items-center border-b border-zinc-800 backdrop-blur bg-transparent">
+      <div className="flex justify-center items-center w-[15%] h-[100%] p-16 ">
         <h3 className="font-bold text-[20px] text-white">Arteora</h3>
       </div>
-      <div className="flex justify-start items-center w-[85%] h-[100%]  gap-[3%] ml-[30%]">
+      <div className="p-6 lg:hidden">
+       <AlignJustify color="white"/>
+      </div>
+      <div className="hidden lg:flex justify-between lg:justify-start items-center w-[85%] h-[100%] gap-[3%] ml-[30%]">
         <Link to="/" className="text-white text-[14px] font-medium">
           Home
         </Link>
