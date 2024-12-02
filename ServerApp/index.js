@@ -77,7 +77,7 @@ const storage=multer.diskStorage({
         cb(null,'uploads')
     },
     filename:(req,file,cb)=>{
-        cb(null,uuidv4() + '-'+file.filename)
+        cb(null,uuidv4() + '-'+file.originalname)
     }
 })
 
@@ -125,6 +125,85 @@ app.put('/update-user/:userId',upload.single('profilePhoto'), async (req,res)=>{
         })
     }
 });
+
+app.post('/create-artwork',upload.array('imageUrls',5), async(req,res)=>{
+    const {name,publishedDate,author,price,category,description}=req.body;
+
+    const imageUrls=req.files.map((file)=>file.filename)
+
+    const artwork=new Artwork({
+        name,
+        publishedDate,
+        author,
+        price,
+        category,
+        description,
+        imageUrls
+    })
+
+    try{
+        const savedArtwork=await artwork.save()
+
+        const user=await User.findById(author);
+
+        if(!user){
+            return res.status(404).json({
+                status:"",
+                message:"User not found"
+            })
+        }
+        user.artworks=[...user.artworks,savedArtwork._id];
+        await user.save();
+
+        res.status(200).json({
+            status:"Success",
+            data:savedArtwork
+        })
+    }catch(error){
+        res.status(500).json({
+            status:"Failed",
+            err:`error creating the artwork,${error.message}`
+        });
+    }
+
+   
+});
+
+app.post('/get-user-artworks',async (req,res)=>{
+    const {artworks}=req.body;
+
+    try{
+        const userArtworks= await Artwork.find({_id:{$in:artworks}});
+        res.status(200).json({
+            status:"success",
+            data:userArtworks
+        })
+    }catch(error){
+        res.status(500).json({
+            status:"failed",
+            error:error
+        })
+    }
+});
+
+app.get('/get-artwork/:id',async (req,res)=>{
+    const artworkId = req.params.id;
+
+    try{
+        const artwork=await Artwork.findById(artworkId);
+        if(artwork){
+            res.status(200).json({
+                status:'success',
+                data:artwork
+            })
+        }
+    }catch(error){
+        res.status(500).json({
+            status:'failed',
+            error:error
+        })
+    }
+})
 
 app.listen(5000,()=>{
     console.log("Server is running...");

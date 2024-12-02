@@ -88,7 +88,7 @@ export default function Dashboard() {
             animate={{ x: 0 }}
             exit={{ x: "-100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
-            className={`w-[70%]  top-0 z-100  h-screen absolute left-0 flex-col justify-start gap-3  bg-zinc-900 z-40 ${"flex"} lg:hidden`}
+            className={`w-[70%]  top-0 z-100  h-screen absolute left-0 flex-col justify-start gap-3  bg-zinc-900 z-40 ${"flex"} lg:w-[20%] lg:sticky`}
           >
             <div className="w-full relative p-5 flex justify-start items-center gap-4 border-b border-zinc-700">
               <form encType="multipart/form-data" onSubmit={handleSubmit}>
@@ -130,13 +130,13 @@ export default function Dashboard() {
                 onClick={handleSideBar}
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-zinc-800 w-full h-[5%] rounded-xl flex justify-center items-center"
-                    : " w-full h-[5%]  flex justify-center items-center"
+                    ? "bg-zinc-800 w-full h-[5%] rounded-xl flex justify-center items-center lg:h-[7%]"
+                    : " w-full h-[5%]  flex justify-center items-center lg:h-[7%]"
                 }
               >
                 <div className="flex justify-start items-center gap-4 p-5 w-full h-full">
-                  <h4 className="text-white text-lg font-medium flex gap-3 items-center justify-start">
-                    <House color="white" /> Dashboard
+                  <h4 className="text-white text-lg font-medium flex gap-3 items-center justify-start lg:text-sm">
+                    <House size={20} color="white" /> Dashboard
                   </h4>
                 </div>
               </NavLink>
@@ -146,13 +146,13 @@ export default function Dashboard() {
                 onClick={handleSideBar}
                 className={({ isActive }) =>
                   isActive
-                    ? "bg-zinc-800 w-full h-[5%] rounded-xl flex justify-center items-center"
-                    : " w-full h-[5%]  flex justify-center items-center"
+                    ? "bg-zinc-800 w-full h-[5%] rounded-xl flex justify-center items-center lg:h-[7%]"
+                    : " w-full h-[5%]  flex justify-center items-center lg:h-[7%]"
                 }
               >
                 <div className="flex justify-start items-center gap-4 p-5 w-full h-full">
-                  <h4 className="text-white text-lg font-medium flex gap-3 items-center justify-start">
-                    <Image color="white" /> Artworks
+                  <h4 className="text-white text-lg font-medium flex gap-3 items-center justify-start lg:text-sm">
+                    <Image color="white" size={20} /> Artworks
                   </h4>
                 </div>
               </NavLink>
@@ -174,7 +174,7 @@ export default function Dashboard() {
             <h4 className="text-white text-lg">Tue 2024</h4>
           </div>
         </div>
-        <div className="flex-1 p-5 overflow-auto w-full border border-zinc-800 rounded-xl mt-10">
+        <div className="flex-1 p-5 overflow-auto w-full rounded-xl mt-10 lg:min-w-[80%]">
           <Outlet context={{user}} />
         </div>
       </div>

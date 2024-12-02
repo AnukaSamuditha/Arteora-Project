@@ -21,7 +21,7 @@ const artworkSchema=mongoose.Schema({
         type:Number,
         required:true
     },
-    ImageUrls:[{
+    imageUrls:[{
         type:String,
         required:true,
         def:[]
