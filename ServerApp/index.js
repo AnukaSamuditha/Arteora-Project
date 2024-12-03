@@ -205,6 +205,44 @@ app.get('/get-artwork/:id',async (req,res)=>{
     }
 })
 
+app.get('/get-artworks',async(req,res)=>{
+    try{
+        const artworks=await Artwork.find({});
+        if(artworks.length > 0){
+            res.status(200).json({
+                status:"success",
+                artworks:artworks
+            })
+        }
+    }catch(err){
+        res.status(500).json({
+            status:"failed",
+            error:err
+        })
+    }
+})
+
+app.delete('/delete-artwork/:artworkId',async (req,res)=>{
+    const {artworkId}=req.params;
+
+    try{
+        if(artworkId){
+            const artwork=await Artwork.findByIdAndDelete(artworkId);
+            res.status(200).json({
+                status:'success',
+                data:{}
+            })
+
+        }
+    }catch(err){
+        res.status(500).json({
+            status:'failed',
+            error:err
+        })
+    }
+
+});
+
 app.listen(5000,()=>{
     console.log("Server is running...");
 })

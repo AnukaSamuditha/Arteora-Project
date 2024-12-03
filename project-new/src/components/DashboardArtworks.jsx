@@ -10,7 +10,7 @@ export default function DashboardArtworks() {
   const navigate=useNavigate();
 
   function handleNavigation(artworkId){
-    navigate(`/dashboard/artworks/${artworkId}`)
+    navigate(`/dashboard/artworks/${artworkId}`);
   }
 
   useEffect(()=>{

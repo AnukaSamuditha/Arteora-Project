@@ -87,7 +87,8 @@ export default {
   		boxShadow: {
   			'3d': '0px 15px 25px rgba(0, 0, 0, 0.8), 0px 5px 10px rgba(255, 255, 255, 0.1)',
   			custom: '0px 48px 100px 0px rgba(255, 255, 255, 0.1)'
-  		}
+  		},
+		
   	}
   },
   plugins: [

@@ -11,6 +11,8 @@ import Artworks from "./components/Artworks";
 import PublishArtwork from "./components/PublishArtwork";
 import Artwork from "./components/Artwork";
 import HomeArtworks from "./components/HomeArtworks";
+import HomeArtwork from "./components/HomeArtwork";
+import UpdateArtwork from './components/UpdateArtwork';
 
 export default function App() {
   return (
@@ -19,14 +21,16 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="signup" element={<SignUp />} />
-          <Route path="artworks" element={<HomeArtworks/>}/>
+          <Route path="artworks" element={<HomeArtworks />} />
+          <Route path="artworks/:artworkId" element={<HomeArtwork />} />
 
           <Route path="dashboard" element={<Dashboard />}>
             <Route index element={<DashboardHome />} />
             <Route path="artworks" element={<Artworks />}>
-              <Route index element={<DashboardArtworks/>} />
-              <Route path="publish-artwork" element={<PublishArtwork/>}/>
-              <Route path=":artworkId" element={<Artwork/>}/>
+              <Route index element={<DashboardArtworks />} />
+              <Route path="publish-artwork" element={<PublishArtwork />} />
+              <Route path=":artworkId" element={<Artwork />}/>
+              <Route path="update-artwork/:artworkId" element={<UpdateArtwork />} /> 
             </Route>
           </Route>
         </Route>
