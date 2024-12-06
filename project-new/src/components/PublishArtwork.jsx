@@ -2,10 +2,10 @@ import React,{useState,useRef} from "react";
 import Axios from "axios";
 import { Brain, ImageUp } from "lucide-react";
 import { motion } from "framer-motion";
-import { useOutletContext } from "react-router-dom";
+import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 
 export default function PublishArtwork() {
-    const {user}=useOutletContext();
+    const {user,setUser}=useOutletContext();
     const[artworks,setArtworks] = useState(user.artworks);
     const [isExpanded,setExpanded] = useState(false);
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -74,7 +74,16 @@ export default function PublishArtwork() {
           imageUrls: [],
           category: "",
         });
+        const newArtwork=res.data.data;
+        setUser((prevData)=>{
+          return{
+            ...prevData,
+            artworks:[...prevData.artworks,newArtwork._id]
+          }
+        })
+        setSelectedFiles([]);
         setExpanded((prevValue)=>!prevValue);
+        
       })
       .catch((err) => {
         console.log("Error creating artwork", err.response || err);

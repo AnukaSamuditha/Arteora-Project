@@ -21,7 +21,11 @@ const userSchema=mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Artwork',
         def:[]
-    }]
+    }],
+    type:{
+        type:String,
+        required:true
+    }
 })
 
 const User= mongoose.model('User',userSchema)

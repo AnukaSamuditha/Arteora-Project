@@ -2,7 +2,6 @@
 import tailwindcssAnimate from 'tailwindcss-animate';
 import { default as flattenColorPalette } from 'tailwindcss/lib/util/flattenColorPalette';
 import svgToDataUri from 'mini-svg-data-uri';
-import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -75,7 +74,8 @@ export default {
   				to: {
   					'background-position': '0% 0%'
   				}
-  			}
+  			},
+			
   		},
   		animation: {
   			marquee: 'marquee var(--duration) infinite linear',
@@ -93,6 +93,7 @@ export default {
   },
   plugins: [
     tailwindcssAnimate,
+	require('tailwind-scrollbar-hide'),
     addVariablesForColors,
     function ({ matchUtilities, theme }) {
       matchUtilities(

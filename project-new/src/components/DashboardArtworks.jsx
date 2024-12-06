@@ -24,7 +24,7 @@ export default function DashboardArtworks() {
             console.log("Error fetching user artworks",err.message);
         })
     }
-  },[artworks]);
+  },[user]);
 
   
   //console.log('Artwork objects here',artworkObjects);
@@ -33,12 +33,12 @@ export default function DashboardArtworks() {
     <div className="w-full h-auto">
       <div className="h-auto w-full dark:bg-black bg-black  dark:bg-dot-white/[0.2] bg-dot-white/[0.2] relative flex flex-col items-center justify-center gap-8">
         {/* <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div> */}
-        <div className="w-full h-auto flex flex-col justify-start items-center mt-5 gap-5 lg:flex-wrap lg:flex-row lg:justify-center">
+        <div className="w-full h-auto flex flex-col justify-start items-center mt-5 gap-5 lg:flex-wrap lg:flex-row lg:justify-start">
         {artworkObjects.length>0 && 
                 artworkObjects.map((artwork)=>{
                     return <div key={artwork._id} className="w-[90%] h-[25rem] border border-zinc-800 rounded-xl p-3 bg-black flex flex-col justify-start gap-3 lg:w-[20%] lg:h-[20rem]" onClick={()=>handleNavigation(artwork._id)}>
                         <img src={artwork.imageUrls[0] ? `http://localhost:5000/uploads/${artwork.imageUrls[0]}` : null} alt={artwork.imageUrls[0] && artwork.imageUrls[0] } className="rounded-xl w-full h-[90%] object-cover"/>
-                        <h1 className="text-white text-xl font-medium tracking-tight">{artwork.name}</h1>
+                        <h1 className="text-white text-xl lg:text-md font-medium tracking-tight">{artwork.name}</h1>
                     </div>
                 })
         }

@@ -132,6 +132,7 @@ export default function Home() {
             Get Started
           </Button>
           <Button
+            onClick={()=>navigate('/login')}
             variant="outline"
             className=" text-white bg-transparent  rounded-[8px] w-[110px] font-[500] hover:text-black"
           >

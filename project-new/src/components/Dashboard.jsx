@@ -3,24 +3,25 @@ import { PanelLeft } from "lucide-react";
 import ProfileIcon from "../Images/user.png";
 import { House } from "lucide-react";
 import { Image } from "lucide-react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { CircleX } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Axios from "axios";
+import { useCookies } from "react-cookie";
 
 export default function Dashboard() {
   const [panel, setPanel] = useState(false);
-  const [userId, setUserId] = useState(
-    localStorage.getItem("loggedUser") || null
-  );
   const [user, setUser] = useState({});
   const [profile, setProfile] = useState({
     profilePhoto: null,
   });
+  const [cookie,setCookie,removeCookie]=useCookies(['loggedUser']);
+  console.log('here is the cookie',cookie.loggedUser);
+  const navigate=useNavigate();
 
   useEffect(() => {
-    if (userId) {
-      Axios.get(`http://localhost:5000/get-user/${userId}`)
+    if (cookie.loggedUser) {
+      Axios.get(`http://localhost:5000/get-user/${cookie.loggedUser}`)
         .then((res) => {
           setUser(res.data.user);
           console.log("user fetched", res.data.user);
@@ -29,7 +30,7 @@ export default function Dashboard() {
           console.log("User not found", err);
         });
     }
-  }, [userId]);
+  }, [cookie.loggedUser]);
 
   useEffect(() => {
     // Trigger form submission when profilePhoto is updated
@@ -59,6 +60,11 @@ export default function Dashboard() {
     }
   }
 
+  function handleSignOut(){
+    removeCookie(['loggedUser']);
+    navigate('/');
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -66,7 +72,7 @@ export default function Dashboard() {
 
     formData.append("profilePhoto", profile.profilePhoto);
 
-    Axios.put(`http://localhost:5000/update-user/${userId}`, formData, {
+    Axios.put(`http://localhost:5000/update-user/${cookie.loggedUser}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -156,6 +162,7 @@ export default function Dashboard() {
                   </h4>
                 </div>
               </NavLink>
+              <h1 className="text-zinc-500 text-lg font-medium leading-none text-center absolute bottom-28 cursor-pointer" onClick={handleSignOut}>Sign Out</h1>
             </div>
           </motion.div>
         )}
@@ -175,7 +182,7 @@ export default function Dashboard() {
           </div>
         </div>
         <div className="flex-1 p-5 overflow-auto w-full rounded-xl mt-10 lg:min-w-[80%]">
-          <Outlet context={{user}} />
+          <Outlet context={{user,setUser}} />
         </div>
       </div>
     </div>

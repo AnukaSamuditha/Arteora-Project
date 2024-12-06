@@ -13,6 +13,7 @@ import Artwork from "./components/Artwork";
 import HomeArtworks from "./components/HomeArtworks";
 import HomeArtwork from "./components/HomeArtwork";
 import UpdateArtwork from './components/UpdateArtwork';
+import SignIn from "./components/SignIn";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="signup" element={<SignUp />} />
+          <Route path="login" element={<SignIn/>}/>
           <Route path="artworks" element={<HomeArtworks />} />
           <Route path="artworks/:artworkId" element={<HomeArtwork />} />
 

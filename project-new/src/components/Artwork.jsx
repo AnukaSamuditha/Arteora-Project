@@ -18,6 +18,7 @@ export default function Artwork() {
         .then((res) => {
           setArtwork(res.data.data);
           console.log("This is artwork", res.data.data);
+          console.log('updated imageUrls',res.data.data.imageUrls);
         })
         .catch((err) => {
           console.log("Error fetching artwork", err);
@@ -53,23 +54,26 @@ export default function Artwork() {
         text:'text-xs text-zinc-600',
       },
     }).then((result) => {
-      deleteArtwork(artworkId);
+      if(result.isConfirmed){
+        deleteArtwork(artworkId);
       navigate('/dashboard/artworks');
       Swal.fire({
-        title: "Deleted!",
+        title: "Artwork Deleted!",
         text: "Your file has been deleted.",
         icon: "success",
         customClass:{
-          popup:'bg-zinc-800 w-[90%] max-w-[30rem] h-[15rem] rounded-xl p-3',
+          popup:'bg-zinc-800 w-[90%] lg:w-[30rem] lg:max-w-[30rem] h-auto rounded-xl p-2 flex flex-col justify-start items-center',
           title:'text-white font-semibold tracking-tight leading-none text-2xl mb-2',
-          text:'text-sm text-zinc-600 mb-2',
-          confirmButton:'w-[8rem] bg-black rounded-xl text-white',
+          text:'text-sm text-zinc-300 mb-2',
+          confirmButton:'w-[8rem] bg-white rounded-xl text-black',
           icon:'scale-50 mb-2'
         }
       });
+      }
     });
   }
 
+  
   return (
     <div className="w-full h-auto flex flex-col gap-4 items-center relative">
       <div className="flex justify-start items-center w-full">
@@ -86,7 +90,7 @@ export default function Artwork() {
         </h3>
       </div>
 
-      <div className="w-full h-[28rem] p-4 relative lg:w-[25%] lg:max-h-[25rem] flex justify-center items-center">
+      <div className="w-full h-[28rem] p-3 relative lg:w-[25%] lg:max-h-[25rem] flex justify-center items-center border border-zinc-800 rounded-xl">
         <p className="text-white  text-sm absolute top-6 left-5 bg-zinc-800 rounded-xl p-2 opacity-80 lg:text-xs">
           {artwork && artwork.category}
         </p>
@@ -98,12 +102,12 @@ export default function Artwork() {
           className="object-cover w-full h-full rounded-xl"
         />
       </div>
-      <div className="w-full flex justify-center items-center p-4 mt-5 gap-3">
+      <div className="w-[20rem] flex justify-start items-center p-4 mt-5 gap-3 overflow-x-scroll scrollbar-hide">
         {artwork &&
           artwork.imageUrls.map((image, index) => (
             <div
               key={index}
-              className="w-[4rem] h-[4rem] flex justify-center items-center"
+              className="min-w-[4rem] h-[4rem] flex justify-center items-center cursor-pointer"
               onClick={() => setCurrentImage(index)}
             >
               <img
