@@ -10,6 +10,7 @@ import Axios from "axios";
 import { useCookies } from "react-cookie";
 
 export default function Dashboard() {
+  const url="http://localhost:5000";
   const [panel, setPanel] = useState(false);
   const [user, setUser] = useState({});
   const [profile, setProfile] = useState({
@@ -21,7 +22,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (cookie.loggedUser) {
-      Axios.get(`http://localhost:5000/get-user/${cookie.loggedUser}`)
+      Axios.get(`${url}/get-user/${cookie.loggedUser}`)
         .then((res) => {
           setUser(res.data.user);
           console.log("user fetched", res.data.user);
@@ -47,7 +48,7 @@ export default function Dashboard() {
       const formData = new FormData();
       formData.append("profilePhoto", file);
   
-      Axios.put(`http://localhost:5000/update-user/${cookie.loggedUser}`, formData, {
+      Axios.put(`${url}/update-user/${cookie.loggedUser}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -106,7 +107,7 @@ export default function Dashboard() {
                   <img
                     src={
                       user.profilePhoto
-                        ? `http://localhost:5000/uploads/${user.profilePhoto}`
+                        ? `${url}/uploads/${user.profilePhoto}`
                         : ProfileIcon
                     }
                     alt="user-profile-photo"

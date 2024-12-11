@@ -16,6 +16,7 @@ import emptyProfile from '../../Images/empty-profile.png';
 
 
 export default function NavBar() {
+  const url="http://localhost:5000";
   const [sidebar, setSidebar] = useState(false);
   const [cookies,setCookie,removeCookie]=useCookies(['loggedUser']);
   const[user,setUser]=useState(null);
@@ -23,7 +24,7 @@ export default function NavBar() {
 
   useEffect(()=>{
     if(cookies.loggedUser){
-      axios.get(`http://localhost:5000/get-user/${cookies.loggedUser}`)
+      axios.get(`${url}/get-user/${cookies.loggedUser}`)
       .then((res)=>{
         console.log('nav bar fetched the user',res.data.data);
         setUser(res.data.user);
@@ -193,7 +194,7 @@ export default function NavBar() {
         </Link>
       </div>
       <ButtonWithIcon />
-      {cookies.loggedUser && <div className="hidden w-[7rem] h-[3.5rem] rounded-full lg:flex justify-center items-center p-2 cursor-pointer" onClick={()=>navigate('/dashboard')}> {user && user.profilePhoto ? (<img src={`http://localhost:5000/uploads/${user.profilePhoto}`} alt="profile-photo" className="w-full h-full object-cover rounded-full border-[2px] border-yellow-500"/> ) : (<img src={emptyProfile} alt="profile-photo" className="w-full h-full object-cover rounded-[1000px] border border-yellow-500"/> )}</div>}
+      {cookies.loggedUser && <div className="hidden w-[7rem] h-[3.5rem] rounded-full lg:flex justify-center items-center p-2 cursor-pointer" onClick={()=>navigate('/dashboard')}> {user && user.profilePhoto ? (<img src={`${url}/uploads/${user.profilePhoto}`} alt="profile-photo" className="w-full h-full object-cover rounded-full border-[2px] border-yellow-500"/> ) : (<img src={emptyProfile} alt="profile-photo" className="w-full h-full object-cover rounded-[1000px] border border-yellow-500"/> )}</div>}
     </header>
   );
 }

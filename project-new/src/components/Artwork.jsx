@@ -11,10 +11,11 @@ export default function Artwork() {
   const [currentImage, setCurrentImage] = useState(0);
  
   //console.log("Artwork id here", params.artworkId);
+  const url="http://localhost:5000";
 
   useEffect(() => {
     if (params.artworkId) {
-      Axios.get(`http://localhost:5000/get-artwork/${params.artworkId}`)
+      Axios.get(`${url}/get-artwork/${params.artworkId}`)
         .then((res) => {
           setArtwork(res.data.data);
           console.log("This is artwork", res.data.data);
@@ -27,7 +28,7 @@ export default function Artwork() {
   }, [params.artworkId]);
 
   function deleteArtwork(artworkId) {
-    Axios.delete(`http://localhost:5000/delete-artwork/${artworkId}`)
+    Axios.delete(`${url}/delete-artwork/${artworkId}`)
       .then((res) => {
         console.log("successfully deleted the artwork", res);
       })
@@ -97,7 +98,7 @@ export default function Artwork() {
         <img
           src={
             artwork &&
-            `http://localhost:5000/uploads/${artwork.imageUrls[currentImage]}`
+            `${url}/uploads/${artwork.imageUrls[currentImage]}`
           }
           className="object-cover w-full h-full rounded-xl"
         />
@@ -111,7 +112,7 @@ export default function Artwork() {
               onClick={() => setCurrentImage(index)}
             >
               <img
-                src={`http://localhost:5000/uploads/${image}`}
+                src={`${url}/uploads/${image}`}
                 className="w-full h-full object-cover rounded-xl"
               />
             </div>

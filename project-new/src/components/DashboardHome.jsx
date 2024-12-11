@@ -9,13 +9,14 @@ import { useOutletContext } from "react-router-dom";
 import axios from "axios";
 
 export default function DashboardHome() {
+  const url="http://localhost:5000";
   const { user, setUser } = useOutletContext();
   const [orders, setOrders] = useState([]);
   console.log("orders", user.orders);
 
   useEffect(() => {
     axios
-      .post(`http://localhost:5000/get-orders`, { orders: user.orders })
+      .post(`${url}/get-orders`, { orders: user.orders })
       .then((res) => {
         console.log("Here are order objects", res.data.data);
         setOrders(res.data.data);

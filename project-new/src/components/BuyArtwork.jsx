@@ -7,6 +7,7 @@ import { useCookies } from "react-cookie";
 import emptyProfile from "../Images/empty-profile.png";
 
 export default function BuyArtwork() {
+  const url="http://localhost:5000";
   const [artwork, setArtwork] = useState(null);
   const [order, setOrder] = useState({
     artworkId: "",
@@ -25,9 +26,9 @@ export default function BuyArtwork() {
   dotSpinner.register();
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/get-artwork/${artworkId}`)
+    axios.get(`${url}/get-artwork/${artworkId}`)
       .then((res) => {
-        console.log('artworf fetched',res.data.data)
+        //console.log('artwork fetched',res.data.data)
         setArtwork(res.data.data);
       })
       .catch((err) => {
@@ -52,7 +53,7 @@ export default function BuyArtwork() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/get-user/${cookies.loggedUser}`)
+      .get(`${url}/get-user/${cookies.loggedUser}`)
       .then((res) => {
         setUser(res.data.user);
       })
@@ -71,7 +72,7 @@ export default function BuyArtwork() {
 
     console.log('date',order.date);
 
-    axios.post("http://localhost:5000/buy-artwork",order)
+    axios.post(`${url}/buy-artwork`,order)
     .then((res)=>{
         console.log('order made successfully',res.data.order);
     })
@@ -123,7 +124,7 @@ export default function BuyArtwork() {
               <img
                 src={
                   artwork && artwork.imageUrls
-                    ? `http://localhost:5000/uploads/${artwork.imageUrls[0]}`
+                    ? `${url}/uploads/${artwork.imageUrls[0]}`
                     : emptyProfile
                 }
                 alt={artwork && artwork.name}

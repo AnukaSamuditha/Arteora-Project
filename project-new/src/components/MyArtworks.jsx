@@ -3,13 +3,14 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import Axios from "axios";
 
 export default function MyArtworks() {
+  const url="http://localhost:5000";
   const { user, setUser } = useOutletContext();
   const [artworkObjects, setArtworkObjects] = useState([]);
   const navigate=useNavigate();
     //console.log('user',user)
   useEffect(() => {
     if (user.boughtArtworks && user.boughtArtworks.length > 0) {
-      Axios.post(`http://localhost:5000/get-user-artworks`, {
+      Axios.post(`${url}/get-user-artworks`, {
         artworks: user.boughtArtworks,
       })
         .then((res) => {
@@ -45,7 +46,7 @@ export default function MyArtworks() {
                   <img
                     src={
                       artwork.imageUrls[0]
-                        ? `http://localhost:5000/uploads/${artwork.imageUrls[0]}`
+                        ? `${url}/uploads/${artwork.imageUrls[0]}`
                         : null
                     }
                     alt={artwork.imageUrls[0] && artwork.imageUrls[0]}

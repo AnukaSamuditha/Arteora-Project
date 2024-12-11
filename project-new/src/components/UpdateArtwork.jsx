@@ -4,6 +4,7 @@ import Axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpdateArtwork() {
+  const url="http://localhost:5000";
   const [artwork, setArtwork] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -20,7 +21,7 @@ export default function UpdateArtwork() {
 
   useEffect(() => {
     if (params.artworkId) {
-      Axios.get(`http://localhost:5000/get-artwork/${params.artworkId}`)
+      Axios.get(`${url}/get-artwork/${params.artworkId}`)
         .then((res) => {
           setArtwork(res.data.data);
           console.log("successfully fetched artwork data");
@@ -141,7 +142,7 @@ export default function UpdateArtwork() {
     console.log("uploaded files from the front end", formData.imageUrls);
 
     Axios.put(
-      `http://localhost:5000/update-artwork/${params.artworkId}`,
+      `${url}/update-artwork/${params.artworkId}`,
       form,
       {
         headers: {
@@ -270,7 +271,7 @@ export default function UpdateArtwork() {
                     src={
                       image instanceof File
                         ? URL.createObjectURL(image)
-                        : `http://localhost:5000/uploads/${image}`
+                        : `${url}/uploads/${image}`
                     }
                     className="object-cover w-full h-full rounded-xl"
                   />

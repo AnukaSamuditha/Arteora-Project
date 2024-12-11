@@ -5,6 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { dotSpinner } from "ldrs";
 
 export default function MyArtwork() {
+  const url="http://localhost:5000";
   const [artwork, setArtwork] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -14,7 +15,7 @@ export default function MyArtwork() {
 
   useEffect(() => {
     if (artworkId) {
-      Axios.get(`http://localhost:5000/get-artwork/${artworkId}`)
+      Axios.get(`${url}/get-artwork/${artworkId}`)
         .then((res) => {
           setArtwork(res.data.data);
           //console.log("Home artwork data is here", res.data.data);
@@ -56,7 +57,7 @@ export default function MyArtwork() {
         <img
           src={
             artwork &&
-            `http://localhost:5000/uploads/${artwork.imageUrls[currentImage]}`
+            `${url}/uploads/${artwork.imageUrls[currentImage]}`
           }
           className="object-cover w-full h-full rounded-xl"
         />
@@ -70,7 +71,7 @@ export default function MyArtwork() {
               onClick={() => setCurrentImage(index)}
             >
               <img
-                src={`http://localhost:5000/uploads/${image}`}
+                src={`${url}/uploads/${image}`}
                 className="w-full h-full object-cover rounded-xl"
               />
             </div>

@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function HomeArtworks() {
-
+    const url="http://localhost:5000";
     const [artworks,setArtworks]=useState([]);
     const navigate=useNavigate();
 
   useEffect(()=>{
-    Axios.get('http://localhost:5000/get-artworks')
+    Axios.get(`${url}/get-artworks`)
     .then((res)=>{
         setArtworks(res.data.artworks)
     })
@@ -60,7 +60,7 @@ export default function HomeArtworks() {
       {artworks.length>0 && 
                 artworks.map((artwork)=>{
                     return <div key={artwork._id} className="w-[80%] h-[25rem] border border-zinc-800 rounded-xl p-3 bg-black flex flex-col justify-start gap-3 lg:w-[20%] lg:h-[20rem]" onClick={()=>handleNavigate(artwork._id)}>
-                        <img src={artwork.imageUrls[0] ? `http://localhost:5000/uploads/${artwork.imageUrls[0]}` : null} alt={artwork.imageUrls[0] && artwork.imageUrls[0] } className="rounded-xl w-full h-[90%] object-cover"/>
+                        <img src={artwork.imageUrls[0] ? `${url}/uploads/${artwork.imageUrls[0]}` : null} alt={artwork.imageUrls[0] && artwork.imageUrls[0] } className="rounded-xl w-full h-[90%] object-cover"/>
                         <h1 className="text-white text-xl lg:text-[17px] font-medium tracking-tight">{artwork.name}</h1>
                     </div>
                 })

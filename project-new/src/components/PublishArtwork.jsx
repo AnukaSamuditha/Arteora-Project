@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 
 export default function PublishArtwork() {
+    const url="http://localhost:5000";
     const {user,setUser}=useOutletContext();
     const[artworks,setArtworks] = useState(user.artworks);
     const [isExpanded,setExpanded] = useState(false);
@@ -57,7 +58,7 @@ export default function PublishArtwork() {
       form.append("imageUrls", file);
     });
 
-    Axios.post("http://localhost:5000/create-artwork", form, {
+    Axios.post(`${url}/create-artwork`, form, {
       headers: {
         "Content-Type": "multipart/form-data",
       },

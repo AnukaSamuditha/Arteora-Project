@@ -3,6 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import Axios from "axios";
 
 export default function DashboardArtworks() {
+  const url="http://localhost:5000";
   const { user } = useOutletContext();
   const [artworks, setArtworks] = useState(user.artworks);
   const [artworkObjects,setArtworkObjects]=useState([]);
@@ -15,7 +16,7 @@ export default function DashboardArtworks() {
 
   useEffect(()=>{
     if(user.artworks && user.artworks.length>0){
-        Axios.post(`http://localhost:5000/get-user-artworks`,{artworks : artworks})
+        Axios.post(`${url}/get-user-artworks`,{artworks : artworks})
         .then((res)=>{
             console.log("Successfully fetched user's artworks",res.data.data);
             setArtworkObjects(res.data.data);
@@ -37,7 +38,7 @@ export default function DashboardArtworks() {
         {artworkObjects.length>0 && 
                 artworkObjects.map((artwork)=>{
                     return <div key={artwork._id} className="w-[90%] h-[28rem] border border-zinc-800 rounded-xl p-3 bg-black flex flex-col justify-start gap-3 lg:w-[15rem] lg:h-[20rem]" onClick={()=>handleNavigation(artwork._id)}>
-                        <img src={artwork.imageUrls[0] ? `http://localhost:5000/uploads/${artwork.imageUrls[0]}` : null} alt={artwork.imageUrls[0] && artwork.imageUrls[0] } className="rounded-xl w-full h-[90%] object-cover"/>
+                        <img src={artwork.imageUrls[0] ? `${url}/uploads/${artwork.imageUrls[0]}` : null} alt={artwork.imageUrls[0] && artwork.imageUrls[0] } className="rounded-xl w-full h-[90%] object-cover"/>
                         <h1 className="text-white text-xl lg:text-sm font-medium tracking-tight">{artwork.name}</h1>
                     </div>
                 })

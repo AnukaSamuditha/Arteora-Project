@@ -6,6 +6,7 @@ import { Eye, EyeClosed, ShieldAlert } from "lucide-react";
 import Swal from "sweetalert2";
 
 export default function SignIn(){
+    const url="http://localhost:5000";
     const[formData,setFormData]=useState({
         email:'',
         password:''
@@ -20,7 +21,7 @@ export default function SignIn(){
     const[viewPassword,setViewPassword]=useState(false);
     const navigate=useNavigate();
 
-   console.log('email',formData.email)
+   //console.log('email',formData.email)
       
     function triggerAlert(){
         Swal.fire({
@@ -78,7 +79,7 @@ export default function SignIn(){
         return
        }
 
-        Axios.post('http://localhost:5000/login',{
+        Axios.post(`${url}/login`,{
             email:formData.email,
             password:formData.password
         })
