@@ -28,6 +28,10 @@ app.use("/uploads/", express.static(path.join(__dirname, "uploads")));
 
 const port=process.env.PORT || 5000
 
+app.get('/get',async(req,res)=>{
+  res.json("hello");
+})
+
 app.post("/create-user", async (req, res) => {
   const { username, password, email, type } = req.body;
 
