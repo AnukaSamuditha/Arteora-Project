@@ -25,8 +25,8 @@ import image9 from "../../Images/image9.jpg";
 import image10 from "../../Images/image10.jpg";
 import image11 from "../../Images/Image11.jpg";
 import image12 from "../../Images/Image12.jpg";
-import image13 from "../../Images/Image13.jpg";
-import image14 from "../../Images/Image14.jpg";
+import image13 from "../../Images/image13.jpg";
+import image14 from "../../Images/image14.jpg";
 
 export default function Home() {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
