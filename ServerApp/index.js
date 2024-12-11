@@ -12,7 +12,8 @@ const Order = require('./Models/Order');
 app.use(express.json());
 app.use(cors({
   origin:['https://arteora-project-frontend.vercel.app'],
-  credentials:true
+  credentials:true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
 }));
 require('dotenv').config();
 
