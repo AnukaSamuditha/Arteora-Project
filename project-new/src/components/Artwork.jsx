@@ -11,8 +11,7 @@ export default function Artwork() {
   const [currentImage, setCurrentImage] = useState(0);
  
   //console.log("Artwork id here", params.artworkId);
-  const url=import.meta.env.VITE_BACKENDURL;
-
+  const url="https://arteora-project-backend.vercel.app";
   useEffect(() => {
     if (params.artworkId) {
       Axios.get(`${url}/get-artwork/${params.artworkId}`)

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 
 export default function PublishArtwork() {
-    const url=import.meta.env.VITE_BACKENDURL;
+    const url="https://arteora-project-backend.vercel.app";
     const {user,setUser}=useOutletContext();
     const[artworks,setArtworks] = useState(user.artworks);
     const [isExpanded,setExpanded] = useState(false);
