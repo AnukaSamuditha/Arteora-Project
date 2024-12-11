@@ -13,7 +13,7 @@ import { MagicCard } from "./magic-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ImagesColumn from "./ImagesColumn";
 import { useNavigate } from "react-router-dom";
-import image1 from "../../Images/Image1.jpg";
+import image1 from "../../Images/Image1.webp";
 import image2 from "../../Images/image2.jpg";
 import image3 from "../../Images/image3.jpg";
 import image4 from "../../Images/image4.jpg";
@@ -38,7 +38,7 @@ export default function Home() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
+  console.log("this is image",image1)
   const cardInfo = [
     {
       name: "Anuka Samuditha",
