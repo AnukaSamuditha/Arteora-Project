@@ -11,7 +11,7 @@ export default function Artwork() {
   const [currentImage, setCurrentImage] = useState(0);
  
   //console.log("Artwork id here", params.artworkId);
-  const url="http://localhost:5000";
+  const url="https://arteora-project-backend.vercel.app";
 
   useEffect(() => {
     if (params.artworkId) {

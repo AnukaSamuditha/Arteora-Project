@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import Swal from "sweetalert2";
 
 export default function SignUp(){
+    const url="https://arteora-project-backend.vercel.app"
     const [formData,setFormData]=useState({
         username:"",
         email:"",
@@ -41,7 +42,7 @@ export default function SignUp(){
     function HandleSubmit(event){
         event.preventDefault()
 
-        Axios.post('http://localhost:5000/create-user',{
+        Axios.post(`${url}/create-user`,{
             username:formData.username,
             email:formData.email,
             password:formData.password,
