@@ -7,7 +7,7 @@ import { useCookies } from "react-cookie";
 import emptyProfile from "../Images/empty-profile.png";
 
 export default function BuyArtwork() {
-  const url="https://arteora-project-backend.vercel.app";
+  const url=import.meta.env.VITE_BACKENDURL;
   const [artwork, setArtwork] = useState(null);
   const [order, setOrder] = useState({
     artworkId: "",

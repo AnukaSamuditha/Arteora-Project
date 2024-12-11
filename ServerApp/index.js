@@ -8,16 +8,13 @@ const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const Artwork = require("./Models/Artwork");
 const Order = require('./Models/Order');
-const index=require('./')
 
 app.use(express.json());
 app.use(cors());
-
-const DB =
-  "mongodb+srv://anukasamuditha:a2vNB4ztKWz1ofa1@aretora-cluster.ykm8b.mongodb.net/Arteora?retryWrites=true&w=majority&appName=Aretora-Cluster";
+require('dotenv').config();
 
 mongoose
-  .connect(DB, {
+  .connect(process.env.DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -427,6 +424,6 @@ app.post('/get-orders',async(req,res)=>{
   }
 })
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   console.log("Server is running...");
 });

@@ -9,7 +9,7 @@ import { useOutletContext } from "react-router-dom";
 import axios from "axios";
 
 export default function DashboardHome() {
-  const url="https://arteora-project-backend.vercel.app";
+  const url=import.meta.env.VITE_BACKENDURL;
   const { user, setUser } = useOutletContext();
   const [orders, setOrders] = useState([]);
   console.log("orders", user.orders);
