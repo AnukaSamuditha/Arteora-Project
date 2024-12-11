@@ -25,7 +25,17 @@ const userSchema=mongoose.Schema({
     type:{
         type:String,
         required:true
-    }
+    },
+    boughtArtworks:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Artwork',
+        def:[]
+    }],
+    orders:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Order',
+        def:[]
+    }]
 })
 
 const User= mongoose.model('User',userSchema)

@@ -1,5 +1,5 @@
-import { Link, NavLink } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -10,9 +10,27 @@ import {
 import { ButtonWithIcon } from "./ButtonWithIcon";
 import { AlignJustify, CircleX, House } from "lucide-react";
 import { motion } from "framer-motion";
+import { useCookies } from "react-cookie";
+import axios from "axios";
+import emptyProfile from '../../Images/empty-profile.png';
+
 
 export default function NavBar() {
   const [sidebar, setSidebar] = useState(false);
+  const [cookies,setCookie,removeCookie]=useCookies(['loggedUser']);
+  const[user,setUser]=useState(null);
+  const navigate=useNavigate();
+
+  useEffect(()=>{
+    if(cookies.loggedUser){
+      axios.get(`http://localhost:5000/get-user/${cookies.loggedUser}`)
+      .then((res)=>{
+        console.log('nav bar fetched the user',res.data.data);
+        setUser(res.data.user);
+      })
+    }
+  },[cookies.loggedUser]);
+
   const components = [
     {
       title: "Abstract",
@@ -74,7 +92,7 @@ export default function NavBar() {
             animate={{ right: 0}}
             exit={{ right: -100}}
             transition={{duration:0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            className="w-[13rem] h-[20rem] absolute top-0 flex flex-col p-4 gap-5 justify-center items-center bg-zinc-950 z-[200] border border-zinc-700 rounded-xl"
+            className="w-[13rem] h-[25rem] absolute top-0 flex flex-col p-4 gap-5 justify-center items-center bg-zinc-950 z-[200] border border-zinc-700 rounded-xl"
           >
             <CircleX color="white" size={25} className="absolute top-4 right-2 opacity-70  " onClick={()=>setSidebar((prevValue)=>!prevValue)}/>
             <div className="w-full h-auto p-3 ">
@@ -128,6 +146,22 @@ export default function NavBar() {
                 Contact
               </NavLink>
             </div>
+
+            {cookies.loggedUser && 
+              (<div className="w-full h-auto p-3">
+              <NavLink
+                to="dashboard"
+                className={({ isActive }) =>
+                  isActive
+                    ? "text-blue-500 text-xl leading-none font-medium"
+                    : "text-white text-lg  font-medium leading-none"
+                }
+              >
+                Dashboard
+              </NavLink>
+            </div>)
+            }
+
           </motion.div>
         )}
       </div>
@@ -159,6 +193,7 @@ export default function NavBar() {
         </Link>
       </div>
       <ButtonWithIcon />
+      {cookies.loggedUser && <div className="hidden w-[7rem] h-[3.5rem] rounded-full lg:flex justify-center items-center p-2 cursor-pointer" onClick={()=>navigate('/dashboard')}> {user && user.profilePhoto ? (<img src={`http://localhost:5000/uploads/${user.profilePhoto}`} alt="profile-photo" className="w-full h-full object-cover rounded-full border-[2px] border-yellow-500"/> ) : (<img src={emptyProfile} alt="profile-photo" className="w-full h-full object-cover rounded-[1000px] border border-yellow-500"/> )}</div>}
     </header>
   );
 }

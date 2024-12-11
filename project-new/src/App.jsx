@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
@@ -14,8 +14,12 @@ import HomeArtworks from "./components/HomeArtworks";
 import HomeArtwork from "./components/HomeArtwork";
 import UpdateArtwork from './components/UpdateArtwork';
 import SignIn from "./components/SignIn";
+import BuyArtwork from "./components/BuyArtwork";
+import MyArtworks from "./components/MyArtworks";
+import MyArtwork from "./components/MyArtwork";
 
 export default function App() {
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -25,6 +29,7 @@ export default function App() {
           <Route path="login" element={<SignIn/>}/>
           <Route path="artworks" element={<HomeArtworks />} />
           <Route path="artworks/:artworkId" element={<HomeArtwork />} />
+          <Route path="artworks/:artworkId/buy-artwork" element={<BuyArtwork/>}/>
 
           <Route path="dashboard" element={<Dashboard />}>
             <Route index element={<DashboardHome />} />
@@ -34,6 +39,8 @@ export default function App() {
               <Route path=":artworkId" element={<Artwork />}/>
               <Route path="update-artwork/:artworkId" element={<UpdateArtwork />} /> 
             </Route>
+            <Route path="my-artworks" element={<MyArtworks/>}/>
+            <Route path="my-artworks/:artworkId" element={<MyArtwork/>}/>
           </Route>
         </Route>
       </Routes>

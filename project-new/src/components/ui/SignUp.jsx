@@ -1,8 +1,7 @@
 import React,{useState}from "react";
 import Axios from "axios";
 import { useCookies } from "react-cookie";
-
-
+import Swal from "sweetalert2";
 
 export default function SignUp(){
     const [formData,setFormData]=useState({
@@ -24,6 +23,21 @@ export default function SignUp(){
         })
     }
 
+    function triggerAlert(){
+        Swal.fire({
+            position:"center",
+            icon:'success',
+            title:'Account created successfully',
+            showConfirmButton:false,
+            timer:1500,
+            customClass:{
+                popup:'bg-zinc-900 rounded-xl p-2 w-[90%] lg:w-[30%] h-auto border border-zinc-800',
+                title:'text-white font-semibold leading-none text-xs pb-5',
+                icon:'scale-50'
+            }
+        })
+    }
+
     function HandleSubmit(event){
         event.preventDefault()
 
@@ -32,11 +46,13 @@ export default function SignUp(){
             email:formData.email,
             password:formData.password,
             type:formData.type || 'regular'
+
         }).then((res)=>{
             console.log("User created successfully",res.data.data._id);
             setCookie('loggedUser',res.data.data._id,{path:'/',maxAge:3600});
-            localStorage.setItem("loggedUser",res.data.data._id)
-            alert("Signup successfull");
+            //localStorage.setItem("loggedUser",res.data.data._id)
+            //alert("Signup successfull");
+            triggerAlert();
             setFormData({
                 username:"",
                 email:"",

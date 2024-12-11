@@ -75,7 +75,7 @@ export default function Artwork() {
 
   
   return (
-    <div className="w-full h-auto flex flex-col gap-4 items-center relative">
+    <div className="w-full h-auto flex flex-col gap-4 items-center relative p-4">
       <div className="flex justify-start items-center w-full">
         <ArrowLeft
           color="white"
@@ -90,7 +90,7 @@ export default function Artwork() {
         </h3>
       </div>
 
-      <div className="w-full h-[28rem] p-3 relative lg:w-[25%] lg:max-h-[25rem] flex justify-center items-center border border-zinc-800 rounded-xl">
+      <div className="w-full h-[28rem] p-3 relative lg:w-[18rem] lg:max-h-[25rem] flex justify-center items-center border border-zinc-800 rounded-xl">
         <p className="text-white  text-sm absolute top-6 left-5 bg-zinc-800 rounded-xl p-2 opacity-80 lg:text-xs">
           {artwork && artwork.category}
         </p>

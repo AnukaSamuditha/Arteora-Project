@@ -45,13 +45,13 @@ export default function HomeArtworks() {
             className="placeholder-zinc-600 bg-transparent w-[80%] lg:w-[90%] h-full text-white rounded-tr-[1000px] rounded-br-[1000px] focus:outline-none "
           />
         </div>
-        <div className="w-[50%] flex justify-center items-center mt-8">
-        <small className="text-white text-sm tracking-tight leading-none font-semibold pr-4 pl-4">Trending Searches</small>
-        <div className="flex justify-start items-center gap-5">
-          <small className="text-xs text-white bg-zinc-800 pr-4 pl-4 pt-2 pb-2 rounded-xl">wall arts</small>
-          <small className="text-xs text-white bg-zinc-800 pr-4 pl-4 pt-2 pb-2 rounded-xl">abstract</small>
-          <small className="text-xs text-white bg-zinc-800 pr-4 pl-4 pt-2 pb-2 rounded-xl">canvas</small>
-          <small className="text-xs text-white bg-zinc-800 pr-4 pl-4 pt-2 pb-2 rounded-xl">liyando</small>
+        <div className="lg:w-[50%] w-[90%] flex justify-center items-center mt-8">
+        <small className="w-[45%] text-white text-sm tracking-tight leading-none font-semibold lg:pr-4 lg:pl-4">Trending Searches</small>
+        <div className="w-[55%] flex justify-start items-center gap-5 overflow-hidden overflow-x-scroll scrollbar-hide">
+          <small className="text-xs text-white whitespace-nowrap bg-zinc-800 pr-4 pl-4 pt-2 pb-2 rounded-xl">wall arts</small>
+          <small className="text-xs text-white whitespace-nowrap bg-zinc-800 pr-4 pl-4 pt-2 pb-2 rounded-xl">abstract</small>
+          <small className="text-xs text-white whitespace-nowrap bg-zinc-800 pr-4 pl-4 pt-2 pb-2 rounded-xl">canvas</small>
+          <small className="text-xs text-white whitespace-nowrap bg-zinc-800 pr-4 pl-4 pt-2 pb-2 rounded-xl">liyando</small>
         </div>
       </div>
       </div>

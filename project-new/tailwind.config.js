@@ -89,6 +89,7 @@ export default {
   			custom: '0px 48px 100px 0px rgba(255, 255, 255, 0.1)'
   		},
 		
+		
   	}
   },
   plugins: [

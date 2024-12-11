@@ -7,6 +7,7 @@ const multer = require("multer");
 const { v4: uuidv4 } = require("uuid");
 const path = require("path");
 const Artwork = require("./Models/Artwork");
+const Order = require('./Models/Order');
 
 app.use(express.json());
 app.use(cors());
@@ -29,6 +30,14 @@ app.use("/uploads/", express.static(path.join(__dirname, "uploads")));
 
 app.post("/create-user", async (req, res) => {
   const { username, password, email, type } = req.body;
+
+  const available=await User.findOne({email})
+
+  if(available){
+    return res.status(500).json({
+      status:'email already available'
+    })
+  }
 
   const user = new User({
     username,
@@ -306,17 +315,21 @@ app.put("/update-artwork/:artworkId",
 );
 
 app.post('/login',async(req,res)=>{
-  const{email}=req.body;
+  const{email,password}=req.body;
 
   try{
     const user=await User.findOne({email:email});
 
     if(!user){
-      res.status(404).json({
-        status:'user not found'
+      return res.status(404).json({
+        status:'Invalid email address'
       })
     }
-
+    if(password!==user.password){
+      return res.status(401).json({
+        msg:'Invalid email or password'
+      })
+    }
     res.status(200).json({
       status:'user found',
       data:user
@@ -328,6 +341,88 @@ app.post('/login',async(req,res)=>{
     })
   }
 });
+
+app.post('/buy-artwork',async (req,res)=>{
+  const {artworkId,buyer,seller,amount,date,artworkName,buyerName}=req.body;
+
+  console.log('received artwork id',req.body.buyer);
+  console.log('received date',date);
+
+  try{
+    const artwork=await Artwork.findById(artworkId);
+    const buyerObj=await User.findById(buyer);
+    const sellerObj=await User.findById(seller);
+
+    
+    if(!artwork){
+      return res.status(404).json({
+        message:'invalid artwork'
+      })
+    }
+
+    //Changing the status of the artwork after buying
+    artwork.status='sold';
+    const updatedArtwork=await artwork.save();
+    
+    if (!buyerObj.boughtArtworks.includes(artworkId)) {
+      buyerObj.boughtArtworks.push(artworkId);
+    }
+    const updatedBuyer=await buyerObj.save();
+
+    const order=new Order({
+      artworkId,
+      buyer,
+      seller,
+      amount,
+      date,
+      artworkName,
+      buyerName
+    })
+    const savedOrder=await order.save();
+
+    sellerObj.orders.push(savedOrder._id);
+    const savedSeller=await sellerObj.save();
+
+    res.status(200).json({
+      status:'successfull',
+      artwork:updatedArtwork,
+      seller:savedSeller,
+      buyer:updatedBuyer,
+      order:savedOrder
+    })
+
+  }catch(err){
+    res.status(500).json({
+      status:'failed',
+      err:err.message
+    });
+  }
+})
+
+app.post('/get-orders',async(req,res)=>{
+  const {orders}=req.body;
+
+  try{
+    const orderObjects=await Order.find({_id:{$in:orders}});
+
+    if(!orderObjects){
+      return res.status(404).json({
+        status:'no orders found'
+      })
+    }
+
+    res.status(200).json({
+      status:'success',
+      data:orderObjects
+    })
+
+  }catch(err){
+    res.status(500).json({
+      status:'failed',
+      error:err.message
+    })
+  }
+})
 
 app.listen(5000, () => {
   console.log("Server is running...");

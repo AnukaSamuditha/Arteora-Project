@@ -2,20 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Axios from "axios";
 import { ArrowLeft } from "lucide-react";
+import { dotSpinner } from "ldrs";
 
 export default function HomeArtwork() {
   const [artwork, setArtwork] = useState(null);
-  const [currentImage,setCurrentImage]=useState(0);
+  const [currentImage, setCurrentImage] = useState(0);
 
   const { artworkId } = useParams();
-  const navigate=useNavigate();
+  const navigate = useNavigate();
+  dotSpinner.register();
 
   useEffect(() => {
     if (artworkId) {
       Axios.get(`http://localhost:5000/get-artwork/${artworkId}`)
         .then((res) => {
           setArtwork(res.data.data);
-          console.log("Home artwork data is here", res.data.data);
+          //console.log("Home artwork data is here", res.data.data);
         })
         .catch((err) => {
           console.log("Error fetching home artwork", err);
@@ -23,12 +25,12 @@ export default function HomeArtwork() {
     }
   }, [artworkId]);
 
-  if(!artwork){
-    return(
-      <div>
-        <h1 className="text-white text-sm font-medium tracking-tight">Loading...</h1>
+  if (!artwork) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <l-dot-spinner size="40" speed="0.9" color="white"></l-dot-spinner>
       </div>
-    )
+    );
   }
 
   return (
@@ -83,10 +85,12 @@ export default function HomeArtwork() {
         ${artwork && artwork.price}
       </h5>
       <div className="w-full h-[5rem]   flex flex-col justify-center items-center p-2 gap-4 lg:w-[20%] lg:h-[4rem]">
-        <button className="w-full h-full text-black font-[600] text-xl leading-none outline-none bg-white rounded-xl lg:text-sm ">
+        <button
+          className="w-full h-full text-black font-[600] text-xl leading-none outline-none bg-white rounded-xl lg:text-sm"
+          onClick={() => navigate(`/artworks/${artwork._id}/buy-artwork`)}
+        >
           Buy
         </button>
-        
       </div>
     </div>
   );

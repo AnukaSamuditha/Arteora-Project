@@ -115,7 +115,7 @@ export default function PublishArtwork() {
       >
         <form
           encType="multipart/form-data"
-          className="border border-zinc-800 bg-black rounded-[8px] w-full h-full p-5 lg:w-[30%] lg:mt-16"
+          className="border border-zinc-800 bg-black rounded-[8px] w-full h-full p-5 lg:w-[25rem] lg:mt-16"
           onSubmit={handleSubmit}
         >
           <h5 className="text-white text-2xl font-medium text-left mb-1">

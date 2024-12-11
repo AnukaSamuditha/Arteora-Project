@@ -32,27 +32,36 @@ export default function Dashboard() {
     }
   }, [cookie.loggedUser]);
 
-  useEffect(() => {
-    // Trigger form submission when profilePhoto is updated
-    if (profile.profilePhoto) {
-      const formElement = event.target.form;
-      if (formElement) {
-        formElement.requestSubmit();
-      }
-    }
-  }, [profile.profilePhoto]);
-
   const fileInputRef = useRef(null);
-
-  //console.log(localStorage.getItem('loggedUser'));
 
   function handleSideBar() {
     setPanel((prevValue) => !prevValue);
   }
 
   function handleProfilePhoto(event) {
-    setProfile({ profilePhoto: event.target.files[0] });
+    event.preventDefault();
+    const file = event.target.files[0];
+    if (file) {
+      setProfile({ profilePhoto: file });
+  
+      const formData = new FormData();
+      formData.append("profilePhoto", file);
+  
+      Axios.put(`http://localhost:5000/update-user/${cookie.loggedUser}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+        .then((res) => {
+          setUser(res.data.user);
+          console.log("Profile photo updated successfully", res.data.user);
+        })
+        .catch((err) => {
+          console.error("Error uploading profile photo", err);
+        });
+    }
   }
+  
 
   function triggerFileInput() {
     if (fileInputRef.current) {
@@ -65,24 +74,11 @@ export default function Dashboard() {
     navigate('/');
   }
 
-  function handleSubmit(event) {
-    event.preventDefault();
 
-    const formData = new FormData();
-
-    formData.append("profilePhoto", profile.profilePhoto);
-
-    Axios.put(`http://localhost:5000/update-user/${cookie.loggedUser}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-      .then((res) => {
-        setUser(res.data.user);
-      })
-      .catch((err) => {
-        console.log("Error uploading profile photo", err);
-      });
+  function getDayOfWeek(date) {
+    const options = { weekday: 'short' };  // 'short' gives you the abbreviated day like "Tue", "Wed"
+    const day = new Date(date).toLocaleDateString('en-US', options); // You can change 'en-US' to your desired locale
+    return day;
   }
 
   return (
@@ -97,7 +93,7 @@ export default function Dashboard() {
             className={`w-[70%]  top-0 z-100  h-screen absolute left-0 flex-col justify-start gap-3  bg-zinc-900 z-40 ${"flex"} lg:w-[20%] lg:sticky`}
           >
             <div className="w-full relative p-5 flex justify-start items-center gap-4 border-b border-zinc-700">
-              <form encType="multipart/form-data" onSubmit={handleSubmit}>
+              <form encType="multipart/form-data" onSubmit={handleProfilePhoto}>
                 <div className="w-10 rounded-[1000px]" onClick={triggerFileInput}>
                   <input
                     type="file"
@@ -147,7 +143,7 @@ export default function Dashboard() {
                 </div>
               </NavLink>
 
-              <NavLink
+              {user.type=='artist' && <NavLink
                 to="artworks"
                 onClick={handleSideBar}
                 className={({ isActive }) =>
@@ -161,27 +157,43 @@ export default function Dashboard() {
                     <Image color="white" size={20} /> Artworks
                   </h4>
                 </div>
-              </NavLink>
-              <h1 className="text-zinc-500 text-lg font-medium leading-none text-center absolute bottom-28 cursor-pointer" onClick={handleSignOut}>Sign Out</h1>
+              </NavLink>}
+
+              {user && user.type=='regular' && <NavLink
+                to="my-artworks"
+                onClick={handleSideBar}
+                className={({ isActive }) =>
+                  isActive
+                    ? "bg-zinc-800 w-full h-[5%] rounded-xl flex justify-center items-center lg:h-[7%]"
+                    : " w-full h-[5%]  flex justify-center items-center lg:h-[7%]"
+                }
+              >
+                <div className="flex justify-start items-center gap-4 p-5 w-full h-full">
+                  <h4 className="text-white text-lg font-medium flex gap-3 items-center justify-start lg:text-sm">
+                    <Image color="white" size={20} /> My Artworks
+                  </h4>
+                </div>
+              </NavLink>}
+              <h1 className="text-zinc-500 text-lg lg:text-sm font-medium leading-none text-center absolute bottom-28 cursor-pointer" onClick={handleSignOut}>Sign Out</h1>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="flex-1 flex flex-col  p-5">
-        <div className="flex justify-start items-center gap-5">
+      <div className="w-full p-3 flex-1 flex flex-col ">
+        <div className="flex justify-start items-center gap-3">
           <div
-            className="flex justify-start items-center "
+            className="h-[3rem] w-[3rem] flex justify-center items-center cursor-pointer"
             onClick={handleSideBar}
           >
-            <PanelLeft color="white" />
+            <PanelLeft color="white"/>
           </div>
           {/* Horizontal rule should be put here */}
           <div className="flex justify-center items-center">
-            <h4 className="text-white text-lg">Tue 2024</h4>
+            <h4 className="text-zinc-600 text-md font-semibold">{getDayOfWeek(new Date())} {new Date().getMonth()+1} {new Date().getFullYear()}</h4>
           </div>
         </div>
-        <div className="flex-1 p-5 overflow-auto w-full rounded-xl mt-10 lg:min-w-[80%]">
+        <div className="flex-1 p-5 overflow-auto w-full rounded-xl mt-2 lg:min-w-[80%]">
           <Outlet context={{user,setUser}} />
         </div>
       </div>

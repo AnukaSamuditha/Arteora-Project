@@ -3,7 +3,7 @@ import { NavLink, Outlet,useOutletContext } from "react-router-dom";
 
 export default function Artworks() {
     const {user,setUser}=useOutletContext();
-    console.log("user is here",user);
+    //console.log("user is here",user);
   return (
     <div>
       <div className="flex justify-start items-center gap-5 w-full border border-zinc-800 rounded-xl p-3">
