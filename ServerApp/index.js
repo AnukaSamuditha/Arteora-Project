@@ -10,7 +10,9 @@ const Artwork = require("./Models/Artwork");
 const Order = require('./Models/Order');
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin:['https://arteora-project-frontend.vercel.app']
+}));
 require('dotenv').config();
 
 mongoose
