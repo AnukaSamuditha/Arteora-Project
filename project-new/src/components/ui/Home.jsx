@@ -200,7 +200,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col justify-start items-center w-full h-full">
-      <div className="flex flex-col w-full h-[60vh] lg:h-[80vh] lg:mt-16  justify-start items-center bg-black dark:bg-black bg-dot-white/[0.2] dark:bg-dot-white/[0.2] relative">
+      <div className="flex flex-col w-full h-[60vh] mb-5 lg:h-[80vh] lg:mt-16  justify-start items-center bg-black dark:bg-black bg-dot-white/[0.2] dark:bg-dot-white/[0.2] relative">
         {/* Radial gradient for the background effect */}
         <div className="absolute inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
         <h1 className="font-[600]  text-4xl lg:text-[65px] w-[90%] tracking-tight leading-snug text-center mt-5 relative z-10  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500">
