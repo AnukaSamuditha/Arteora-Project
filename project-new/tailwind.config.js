@@ -75,21 +75,32 @@ export default {
   					'background-position': '0% 0%'
   				}
   			},
-			
+  			meteor: {
+  				'0%': {
+  					transform: 'rotate(215deg) translateX(0)',
+  					opacity: '1'
+  				},
+  				'70%': {
+  					opacity: '1'
+  				},
+  				'100%': {
+  					transform: 'rotate(215deg) translateX(-500px)',
+  					opacity: '0'
+  				}
+  			}
   		},
   		animation: {
   			marquee: 'marquee var(--duration) infinite linear',
   			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
   			gradient: 'gradient 8s linear infinite',
   			rainbow: 'rainbow var(--speed, 2s) infinite linear',
-  			shine: 'shine var(--duration) infinite linear'
+  			shine: 'shine var(--duration) infinite linear',
+  			meteor: 'meteor 5s linear infinite'
   		},
   		boxShadow: {
   			'3d': '0px 15px 25px rgba(0, 0, 0, 0.8), 0px 5px 10px rgba(255, 255, 255, 0.1)',
   			custom: '0px 48px 100px 0px rgba(255, 255, 255, 0.1)'
-  		},
-		
-		
+  		}
   	}
   },
   plugins: [

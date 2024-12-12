@@ -13,7 +13,7 @@ import { MagicCard } from "./magic-card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import ImagesColumn from "./ImagesColumn";
 import { useNavigate } from "react-router-dom";
-import image1 from "../../Images/Image1.webp";
+import image1 from "../../Images/image1.jpg";
 import image2 from "../../Images/image2.jpg";
 import image3 from "../../Images/image3.jpg";
 import image4 from "../../Images/image4.jpg";
@@ -27,6 +27,7 @@ import image11 from "../../Images/Image11.jpg";
 import image12 from "../../Images/Image12.jpg";
 import image13 from "../../Images/image13.jpg";
 import image14 from "../../Images/image14.jpg";
+import Footer from "../Footer";
 
 export default function Home() {
   const [windowHeight, setWindowHeight] = useState(window.innerHeight);
@@ -38,7 +39,7 @@ export default function Home() {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  console.log("this is image",image1)
+  console.log("this is image", image1);
   const cardInfo = [
     {
       name: "Anuka Samuditha",
@@ -125,8 +126,6 @@ export default function Home() {
   const y3 = useTransform(progress4, [0, 1], [0, windowHeight * multiplier3]);
   const y4 = useTransform(progress4, [0, 1], [0, windowHeight * multiplier4]);
 
-  
-
   //console.log(featuresScale);
 
   const artistsContainer = useRef(null);
@@ -200,11 +199,12 @@ export default function Home() {
 
   return (
     <div className="flex flex-col justify-start items-center w-full h-full">
-      <div className="flex flex-col w-full h-[60vh] mb-5 lg:h-[80vh] lg:mt-16  justify-start items-center bg-black dark:bg-black bg-dot-white/[0.2] dark:bg-dot-white/[0.2] relative">
+      <div className="flex flex-col w-full h-[60vh] mb-5 lg:mb-2 lg:h-[75vh] lg:mt-16  justify-start items-center bg-black dark:bg-black bg-dot-white/[0.2] dark:bg-dot-white/[0.2] relative">
         {/* Radial gradient for the background effect */}
         <div className="absolute inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
         <h1 className="font-[600]  text-4xl lg:text-[65px] w-[90%] tracking-tight leading-snug text-center mt-5 relative z-10  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500">
-          Discover and Collect <span className="lg:text-[65px] text-4xl"> Art from </span>
+          Discover and Collect{" "}
+          <span className="lg:text-[65px] text-4xl"> Art from </span>
           <span className="bg-gradient-to-r from-lime-300 to-yellow-400 inline-block text-transparent bg-clip-text">
             Emerging Creators
           </span>
@@ -462,15 +462,39 @@ export default function Home() {
         expressions that inspire and captivate.
       </p>
       <div className="h-[10vh]"></div>
-      <div ref={artsContainer} className="w-[90%] h-[185vh] relative overflow-hidden flex flex-col lg:flex-row justify-center items-start lg:items-center p-4 lg:gap-4">
-        <ImagesColumn Image1={ImageUrls[0]} Image2={ImageUrls[13]} Image3={ImageUrls[12]} Y={y1}/>
-        <ImagesColumn Image1={ImageUrls[3]} Image2={ImageUrls[1]} Image3={ImageUrls[2]} Y={y2}/>
-        <ImagesColumn Image1={ImageUrls[6]} Image2={ImageUrls[7]} Image3={ImageUrls[8]} Y={y3}/>
-        <ImagesColumn Image1={ImageUrls[9]} Image2={ImageUrls[10]} Image3={ImageUrls[11]} Y={y4}/>
+      <div
+        ref={artsContainer}
+        className="w-[90%] h-[185vh] relative overflow-hidden flex flex-col lg:flex-row justify-center items-start lg:items-center p-4 lg:gap-4"
+      >
+        <ImagesColumn
+          Image1={ImageUrls[0]}
+          Image2={ImageUrls[13]}
+          Image3={ImageUrls[12]}
+          Y={y1}
+        />
+        <ImagesColumn
+          Image1={ImageUrls[3]}
+          Image2={ImageUrls[1]}
+          Image3={ImageUrls[2]}
+          Y={y2}
+        />
+        <ImagesColumn
+          Image1={ImageUrls[6]}
+          Image2={ImageUrls[7]}
+          Image3={ImageUrls[8]}
+          Y={y3}
+        />
+        <ImagesColumn
+          Image1={ImageUrls[9]}
+          Image2={ImageUrls[10]}
+          Image3={ImageUrls[11]}
+          Y={y4}
+        />
         <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-black dark:from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black dark:from-background"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-black dark:from-background"></div>
       </div>
       <div className="h-[10vh]"></div>
+      <Footer/>
     </div>
   );
 }

@@ -75,6 +75,12 @@ export default function Dashboard() {
     navigate('/');
   }
 
+  function handlePanelOpen(){
+    if(panel){
+      handleSideBar()
+    }
+  }
+
 
   function getDayOfWeek(date) {
     const options = { weekday: 'short' };  // 'short' gives you the abbreviated day like "Tue", "Wed"
@@ -118,12 +124,6 @@ export default function Dashboard() {
               <h5 className="text-md text-white font-medium">
                 {user && user.username}
               </h5>
-              <CircleX
-                color="white"
-                size={20}
-                className="absolute top-2 right-2 opacity-55"
-                onClick={handleSideBar}
-              />
             </div>
 
             <div className="w-full h-full pr-3 pl-3 gap-2 flex flex-col justify-start items-center">
@@ -181,7 +181,7 @@ export default function Dashboard() {
         )}
       </AnimatePresence>
 
-      <div className="w-full p-3 flex-1 flex flex-col ">
+      <div className="w-full p-3 flex-1 flex flex-col" onClick={handlePanelOpen}>
         <div className="flex justify-start items-center gap-3">
           <div
             className="h-[3rem] w-[3rem] flex justify-center items-center cursor-pointer"
