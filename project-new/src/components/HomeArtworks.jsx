@@ -46,7 +46,7 @@ export default function HomeArtworks() {
           />
         </div>
         <div className="lg:w-[50%] w-[90%] flex justify-center items-center mt-8 gap-3">
-        <small className=" text-white text-sm tracking-tight leading-none font-semibold lg:pr-4 lg:pl-4">Trending Searches</small>
+        <small className=" mb-4 text-white text-sm tracking-tight leading-none font-semibold lg:pr-4 lg:pl-4">Trending Searches</small>
         <div className="w-[55%] flex justify-start items-center gap-5 overflow-hidden overflow-x-scroll scrollbar-hide">
           <small className="text-xs text-white whitespace-nowrap bg-zinc-800 pr-4 pl-4 pt-2 pb-2 rounded-xl">wall arts</small>
           <small className="text-xs text-white whitespace-nowrap bg-zinc-800 pr-4 pl-4 pt-2 pb-2 rounded-xl">abstract</small>
