@@ -20,6 +20,7 @@ export default function NavBar() {
   const [sidebar, setSidebar] = useState(false);
   const [cookies,setCookie,removeCookie]=useCookies(['loggedUser']);
   const[user,setUser]=useState(null);
+  const[isLoaded,setLoaded]=useState(false);
   const navigate=useNavigate();
 
   useEffect(()=>{
@@ -32,7 +33,9 @@ export default function NavBar() {
     }
   },[cookies.loggedUser]);
 
-  
+  function handleLoading(){
+    setLoaded((prevValue)=>!prevValue);
+  }
 
   
 
@@ -147,7 +150,7 @@ export default function NavBar() {
         </Link>
       </div>
       <ButtonWithIcon />
-      {cookies.loggedUser && <div className="hidden w-[4.5rem] h-[3.5rem] rounded-full lg:flex justify-center items-center p-2 cursor-pointer" onClick={()=>navigate('/dashboard')}> {user && user.profilePhoto ? (<img src={`${url}/uploads/${user.profilePhoto}`} alt="profile-photo" className="w-full  object-cover rounded-full border-[2px] border-yellow-500"/> ) : (<img src={emptyProfile} alt="profile-photo" className="w-full h-full object-cover rounded-[1000px] border border-yellow-500"/> )}</div>}
+      {cookies.loggedUser && <div className="hidden max-w-[4.5rem] max-h-[2rem]  rounded-full lg:flex justify-center items-center p-2 cursor-pointer" onClick={()=>navigate('/dashboard')}> {user && user.profilePhoto && isLoaded ? (<img src={`${url}/uploads/${user.profilePhoto}`} alt="profile-photo" onLoad={handleLoading} className="w-full m-h-[3.5rem]  object-cover rounded-full border-[2px] border-yellow-500"/> ) : (<img src={emptyProfile} alt="profile-photo" className="w-full  object-cover rounded-full bg-white border border-yellow-500"/> )}</div>}
     </header>
   );
 }

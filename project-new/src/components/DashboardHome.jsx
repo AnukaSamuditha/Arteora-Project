@@ -108,25 +108,25 @@ export default function DashboardHome() {
       </div>
 
       {user.type=='artist' &&
-        <div className="flex flex-col h-auto justify-start items-start w-full">
+        <div className="flex flex-col h-auto justify-start items-start w-full p-5">
         <div className="w-full p-3">
           <h1 className="text-white text-2xl font-semibold leading-none tracking-tight">Orders</h1>
           <p className="text-md text-zinc-600 font-semibold mb-1 mt-3">Received artwork orders</p>
         </div>
         <div className="lg:w-full w-full h-auto flex flex-col justify-start items-center overflow-hidden">
-          <table className="w-full h-auto border border-zinc-800 table-fixed rounded-xl">
+          <table className="w-full h-auto border border-zinc-800 table-fixed rounded-xl  border-separate">
             <thead>
-              <tr className=" max-w-[20rem] border border-zinc-800 min-h-[3rem] rounded-xl">
-                <th className="text-white font-medium leading-none p-3 w-[25%] border border-zinc-800 ">
+              <tr className=" max-w-[20rem] min-h-[3rem] rounded-xl">
+                <th className="text-white font-medium leading-none p-3 w-[25%]  ">
                   Customer
                 </th>
-                <th className="text-white font-medium leading-none p-3 w-[25%] border border-zinc-800">
+                <th className="text-white font-medium leading-none p-3 w-[25%] ">
                   Artwork
                 </th>
-                <th className="text-white font-medium leading-none p-3 w-[25%] border border-zinc-800">
+                <th className="text-white font-medium leading-none p-3 w-[25%]">
                   Retained
                 </th>
-                <th className="text-white font-medium leading-none p-3 w-[25%] border border-zinc-800">
+                <th className="text-white font-medium leading-none p-3 w-[25%] ">
                   Amount
                 </th>
               </tr>

@@ -38,7 +38,7 @@ export function OrderBarchart() {
   return (
     <Card className="w-full h-full">
       <CardHeader>
-        <CardTitle>Bar Chart - Label</CardTitle>
+        <CardTitle>Order Analysis</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent>

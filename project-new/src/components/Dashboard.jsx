@@ -8,16 +8,18 @@ import { CircleX } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import Axios from "axios";
 import { useCookies } from "react-cookie";
+import emptyProfile from '../Images/empty-profile.png';
 
 export default function Dashboard() {
   const url="https://arteora-project-backend.onrender.com";
   const [panel, setPanel] = useState(false);
   const [user, setUser] = useState({});
+  const [isLoaded,setLoading]=useState(false);
   const [profile, setProfile] = useState({
     profilePhoto: null,
   });
   const [cookie,setCookie,removeCookie]=useCookies(['loggedUser']);
-  console.log('here is the cookie',cookie.loggedUser);
+  //console.log('here is the cookie',cookie.loggedUser);
   const navigate=useNavigate();
 
   useEffect(() => {
@@ -25,7 +27,7 @@ export default function Dashboard() {
       Axios.get(`${url}/get-user/${cookie.loggedUser}`)
         .then((res) => {
           setUser(res.data.user);
-          console.log("user fetched", res.data.user);
+          //console.log("user fetched", res.data.user);
         })
         .catch((err) => {
           console.log("User not found", err);
@@ -37,6 +39,10 @@ export default function Dashboard() {
 
   function handleSideBar() {
     setPanel((prevValue) => !prevValue);
+  }
+
+  function handleLoading(){
+    setLoading((prevValue)=>!prevValue);
   }
 
   function handleProfilePhoto(event) {
@@ -55,7 +61,7 @@ export default function Dashboard() {
       })
         .then((res) => {
           setUser(res.data.user);
-          console.log("Profile photo updated successfully", res.data.user);
+          //console.log("Profile photo updated successfully", res.data.user);
         })
         .catch((err) => {
           console.error("Error uploading profile photo", err);
@@ -110,15 +116,19 @@ export default function Dashboard() {
                     accept=".png, .jpg, .jpeg"
                     ref={fileInputRef}
                   />
+                  {user && user.profilePhoto && isLoaded ? 
                   <img
-                    src={
-                      user.profilePhoto
-                        ? `${url}/uploads/${user.profilePhoto}`
-                        : ProfileIcon
-                    }
+                  src={
+                   `${url}/uploads/${user.profilePhoto}`}
+                  alt="user-profile-photo"
+                  className="rounded-full w-full"
+                  onLoad={handleLoading}
+                  /> : <img
+                    src={emptyProfile}
                     alt="user-profile-photo"
-                    className="rounded-[1000px]"
-                  />
+                    className="rounded-full w-full bg-white"
+                     />
+                }
                 </div>
               </form>
               <h5 className="text-md text-white font-medium">
