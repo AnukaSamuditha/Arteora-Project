@@ -93,15 +93,38 @@ export default function SignIn(){
             triggerAlert()
             setFormData({email:'',password:''});
             
-        }).catch((err)=>{
-
-            if(err.response.status==401){
-                setError((prevErr)=>({...prevErr,email:err.response.data.msg}));
+        }).catch((err) => {
+            if (err.response) {
+                // The request was made, and the server responded with a status code
+                if (err.response.status === 401) {
+                    setError((prevErr) => ({
+                        ...prevErr,
+                        email: err.response.data.msg,
+                    }));
+                }
+                if (err.response.status === 404) {
+                    setError((prevErr) => ({
+                        ...prevErr,
+                        email: err.response.data.status,
+                    }));
+                }
+            } else if (err.request) {
+                // The request was made but no response was received
+                console.error("No response received:", err.request);
+                setError((prevErr) => ({
+                    ...prevErr,
+                    email: "No response from server. Please try again later.",
+                }));
+            } else {
+                // Something happened in setting up the request
+                console.error("Error setting up request:", err.message);
+                setError((prevErr) => ({
+                    ...prevErr,
+                    email: "An unexpected error occurred. Please try again.",
+                }));
             }
-            if(err.response.status==404){
-                setError((prevErr)=>({...prevErr,email:err.response.data.status}));
-            }
-        })
+        });
+        
 
     }
 
