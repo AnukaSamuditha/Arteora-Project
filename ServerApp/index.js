@@ -18,7 +18,7 @@ app.use(cors({
 require('dotenv').config();
 
 mongoose
-  .connect(process.env.DB_URL, {
+  .connect("mongodb+srv://anukasamuditha:a2vNB4ztKWz1ofa1@aretora-cluster.ykm8b.mongodb.net/Arteora?retryWrites=true&w=majority&appName=Aretora-Cluster", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -26,8 +26,9 @@ mongoose
     console.log("Database is connected");
   })
   .catch((error) => {
-    console.log("Database is not connected");
+    console.log("Database is not connected",error.message);
   });
+  
 app.use("/uploads/", express.static(path.join(__dirname, "uploads")));
 
 const port=process.env.PORT || 5000
@@ -432,6 +433,6 @@ app.post('/get-orders',async(req,res)=>{
   }
 })
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT || 5000, () => {
   console.log("Server is running...");
 });
