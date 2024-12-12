@@ -3,10 +3,13 @@ import Axios from "axios";
 import { Brain, ImageUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
 export default function PublishArtwork() {
     const url="https://arteora-project-backend.onrender.com";
     const {user,setUser}=useOutletContext();
+    const navigate=useNavigate();
+    const [cookies,setCookie,removeCookie]=useCookies(['loggedUser']);
     const[artworks,setArtworks] = useState(user.artworks);
     const [isExpanded,setExpanded] = useState(false);
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -25,6 +28,10 @@ export default function PublishArtwork() {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+  }
+
+  if(!cookies.loggedUser){
+    navigate('/login');
   }
 
   function handleChange(event) {

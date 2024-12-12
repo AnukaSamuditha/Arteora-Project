@@ -52,7 +52,8 @@ export default function BuyArtwork() {
   }, [artwork]);
 
   useEffect(() => {
-    axios
+    if(cookies.loggedUser){
+      axios
       .get(`${url}/get-user/${cookies.loggedUser}`)
       .then((res) => {
         setUser(res.data.user);
@@ -60,6 +61,9 @@ export default function BuyArtwork() {
       .catch((err) => {
         console.log("error fetchign user for buying the artwork", err);
       });
+    }else{
+      navigate('/login');
+    }
   }, [cookies.loggedUser]);
 
   function HandleChange(event) {
