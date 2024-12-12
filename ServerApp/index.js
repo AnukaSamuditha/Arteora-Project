@@ -28,13 +28,17 @@ mongoose
   .catch((error) => {
     console.log("Database is not connected",error.message);
   });
-  
+
 app.use("/uploads/", express.static(path.join(__dirname, "uploads")));
 
 const port=process.env.PORT || 5000
 
 app.get('/',async(req,res)=>{
   res.json("hello");
+})
+
+app.get('/api/test',async(req,res)=>{
+  res.json('working');
 })
 
 app.post("/create-user", async (req, res) => {
