@@ -4,7 +4,7 @@ import Axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function UpdateArtwork() {
-  const url="https://arteora-project-backend.vercel.app";
+  const url="https://arteora-project-backend.onrender.com";
   const [artwork, setArtwork] = useState(null);
   const [formData, setFormData] = useState({
     name: "",

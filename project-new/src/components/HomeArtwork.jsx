@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 import { dotSpinner } from "ldrs";
 
 export default function HomeArtwork() {
-  const url="https://arteora-project-backend.vercel.app";
+  const url="https://arteora-project-backend.onrender.com";
   const [artwork, setArtwork] = useState(null);
   const [currentImage, setCurrentImage] = useState(0);
 

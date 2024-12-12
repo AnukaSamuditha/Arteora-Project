@@ -16,7 +16,7 @@ import emptyProfile from '../../Images/empty-profile.png';
 
 
 export default function NavBar() {
-  const url="https://arteora-project-backend.vercel.app";
+  const url="https://arteora-project-backend.onrender.com";
   const [sidebar, setSidebar] = useState(false);
   const [cookies,setCookie,removeCookie]=useCookies(['loggedUser']);
   const[user,setUser]=useState(null);

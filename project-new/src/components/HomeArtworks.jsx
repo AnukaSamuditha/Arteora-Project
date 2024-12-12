@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function HomeArtworks() {
-    const url="https://arteora-project-backend.vercel.app";
+    const url="https://arteora-project-backend.onrender.com";
     const [artworks,setArtworks]=useState([]);
     const navigate=useNavigate();
 

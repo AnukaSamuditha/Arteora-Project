@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import Axios from "axios";
 
 export default function MyArtworks() {
-  const url="https://arteora-project-backend.vercel.app";
+  const url="https://arteora-project-backend.onrender.com";
   const { user, setUser } = useOutletContext();
   const [artworkObjects, setArtworkObjects] = useState([]);
   const navigate=useNavigate();

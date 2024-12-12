@@ -10,7 +10,7 @@ import Axios from "axios";
 import { useCookies } from "react-cookie";
 
 export default function Dashboard() {
-  const url="https://arteora-project-backend.vercel.app";
+  const url="https://arteora-project-backend.onrender.com";
   const [panel, setPanel] = useState(false);
   const [user, setUser] = useState({});
   const [profile, setProfile] = useState({

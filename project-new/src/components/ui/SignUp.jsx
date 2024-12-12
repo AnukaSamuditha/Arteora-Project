@@ -4,7 +4,7 @@ import { useCookies } from "react-cookie";
 import Swal from "sweetalert2";
 
 export default function SignUp(){
-    const url="https://arteora-project-backend.vercel.app";
+    const url="https://arteora-project-backend.onrender.com";
     const [formData,setFormData]=useState({
         username:"",
         email:"",

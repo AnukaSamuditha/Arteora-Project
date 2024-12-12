@@ -6,7 +6,7 @@ import { Eye, EyeClosed, ShieldAlert } from "lucide-react";
 import Swal from "sweetalert2";
 
 export default function SignIn(){
-    const url="https://arteora-project-backend.vercel.app";
+    const url="https://arteora-project-backend.onrender.com";
     const[formData,setFormData]=useState({
         email:'',
         password:''
