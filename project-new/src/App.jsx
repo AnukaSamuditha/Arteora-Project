@@ -17,6 +17,7 @@ import SignIn from "./components/SignIn";
 import BuyArtwork from "./components/BuyArtwork";
 import MyArtworks from "./components/MyArtworks";
 import MyArtwork from "./components/MyArtwork";
+import About from "./components/About";
 
 export default function App() {
   
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="login" element={<SignIn/>}/>
+          <Route path="about" element={<About/>}/>
           <Route path="artworks" element={<HomeArtworks />} />
           <Route path="artworks/:artworkId" element={<HomeArtwork />} />
           <Route path="artworks/:artworkId/buy-artwork" element={<BuyArtwork/>}/>
