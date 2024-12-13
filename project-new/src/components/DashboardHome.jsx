@@ -102,7 +102,7 @@ export default function DashboardHome() {
             </div>
           </div>
           <div className="w-full flex justify-center items-center lg:w-full lg:h-[30rem] mt-5">
-            <OrderBarchart className="min-w-full" />
+            <OrderBarchart className="min-w-full" orders={orders.length}/>
           </div>
         </div>
       </div>
