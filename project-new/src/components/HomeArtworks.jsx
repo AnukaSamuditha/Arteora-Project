@@ -10,6 +10,7 @@ export default function HomeArtworks() {
     const [searchString,setSearchString]=useState("");
     const [result,setResult]=useState([]);
     const navigate=useNavigate();
+    const[isLoaded,setLoad]=useState(false);
 
   useEffect(()=>{
     Axios.get(`${url}/get-artworks`)

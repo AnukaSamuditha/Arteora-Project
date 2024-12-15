@@ -65,17 +65,17 @@ export default function Home() {
   ];
 
   useEffect(() => {
-    // Initialize Lenis
+    
     const lenis = new Lenis({
       smoothWheel: true,
     });
 
-    // Listen for the scroll event and log the event data
+    
     lenis.on("scroll", (e) => {
       //console.log(e);
     });
 
-    // Use requestAnimationFrame to continuously update the scroll
+    
     function raf(time) {
       lenis.raf(time);
       requestAnimationFrame(raf);
@@ -115,7 +115,7 @@ export default function Home() {
   const scaleValue = useTransform(progress1, [0, 1], [0.7, 1]);
   const featuresScale = useTransform(progress2, [0, 1], [0, 1]);
 
-  const isMobile = window.innerWidth < 768; // Adjust the breakpoint as needed
+  const isMobile = window.innerWidth < 768; 
   const multiplier1 = isMobile ? 1 : 2;
   const multiplier2 = isMobile ? 1.5 : 3.3;
   const multiplier3 = isMobile ? 1 : 1.25;
@@ -169,9 +169,9 @@ export default function Home() {
   function handleActiveCard(direction) {
     setActiveCard((prev) => {
       if (direction === "right") {
-        return prev + 1 >= cardArr.length ? 0 : prev + 1; // Reset to 0 if exceeding length
+        return prev + 1 >= cardArr.length ? 0 : prev + 1; 
       } else {
-        return prev - 1 < 0 ? cardArr.length - 1 : prev - 1; // Go to the last card if negative
+        return prev - 1 < 0 ? cardArr.length - 1 : prev - 1; 
       }
     });
   }
