@@ -4,20 +4,20 @@ import Footer from "./Footer";
 export default function Contact() {
   return (
     <div className="w-full h-auto flex flex-col justify-center items-start">
-      <div className="flex flex-col w-full h-[45vh] justify-center items-center bg-black relative">
+      <div className="flex flex-col w-full h-[30vh] lg:h-[45vh] justify-center items-center bg-black relative">
         <div className="absolute inset-0 bg-dot-white/[0.2] dark:bg-dot-white/[0.2]"></div>
 
         <div className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
         <h1 className="text-white  text-center text-5xl font-bold tracking-tighter">
           Get in touch
         </h1>
-        <p className="text-zinc-400  text-sm font-semibold text-center mt-3">
+        <p className="text-zinc-400 w-[90%] lg:w-auto text-sm font-semibold text-center mt-3">
           Have questions, feedback, or simply want to connect? Reach out to
           us—let's create something amazing together!
         </p>
       </div>
       <div className="w-full flex flex-col justify-center items-center">
-        <div className="w-[35%]">
+        <div className="lg:w-[35%] w-[80%]">
           <h1 className="text-white font-bold text-left text-2xl tracking-tighter">
             Message us
           </h1>
@@ -25,7 +25,7 @@ export default function Contact() {
             We will get back to you within 24 hours
           </p>
         </div>
-        <form className="w-[35%] mt-5 flex flex-col justify-center items-start gap-3 mb-12">
+        <form className="lg:w-[35%] w-[80%] mt-5 flex flex-col justify-center items-start gap-3 mb-12">
           <div className="w-full flex justify-center items-center gap-4">
             <div className="w-[50%] flex flex-col justify-center items-start">
               <label htmlFor="firstname" className="text-white text-sm">

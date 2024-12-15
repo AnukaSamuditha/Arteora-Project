@@ -76,7 +76,7 @@ export default function About() {
         <h1 className="absolute top-1/4 text-white font-bold text-center text-6xl tracking-tighter">
           About Us
         </h1>
-        <p className="absolute w-1/2 p-5 top-1/3 text-zinc-500 font-semibold tracking-tighter text-justify text-sm">
+        <p className="absolute w-[90%]  lg:w-1/2 p-5 top-1/3 text-zinc-500 font-semibold tracking-tighter text-justify">
           Welcome to Arteora, a vibrant hub for art lovers and creators alike.
           At Arteora, we celebrate the boundless creativity of artists and bring
           together diverse art styles from all over the world. Our platform is
@@ -87,17 +87,17 @@ export default function About() {
       </div>
 
       <motion.div
-        className=" h-[25rem] p-8  w-full flex justify-center items-center"
+        className=" lg:h-[35rem] h-[60rem] p-8  w-full flex flex-col lg:flex-row  justify-center items-center"
         ref={container}
       >
         <motion.div
           style={{ y: progressValue }}
-          className="flex flex-col justify-center items-start w-[30%] h-full "
+          className="flex flex-col justify-center items-start w-[90%] lg:w-[30%] h-full "
         >
           <h4 className="text-white font-semibold text-2xl tracking-tighter text-center mb-2">
             Our Purpose
           </h4>
-          <p className="text-xs font-medium tracking-tighter text-zinc-400 w-full text-justify">
+          <p className="lg:text-sm text-md font-semibold tracking-tight text-zinc-500 w-full text-justify">
             Arteora is an innovative platform designed to bridge the gap between
             artists and art enthusiasts by providing a dynamic space to explore,
             showcase, and connect. The project aims to celebrate creativity by
@@ -109,9 +109,10 @@ export default function About() {
             in a digital space.
           </p>
         </motion.div>
+
         <motion.div
           style={{ y: progressValue }}
-          className="relative flex justify-center items-center w-[30%]"
+          className="relative flex justify-center items-center w-[80%] lg:w-[30%]"
         >
           <img
             src={monalisa}
@@ -126,12 +127,12 @@ export default function About() {
         </motion.div>
         <motion.div
           style={{ y: progressValue }}
-          className="flex flex-col justify-center items-start w-[30%] p-7 "
+          className="flex flex-col justify-center items-start w-[90%] lg:w-[30%] p-7 "
         >
           <h4 className="text-white font-semibold text-2xl tracking-tighter text-center mb-2">
             Our Target
           </h4>
-          <p className="text-xs font-medium tracking-tighter text-zinc-400 text-justify pb-24">
+          <p className="lg:text-sm text-md font-semibold tracking-tight text-zinc-500 text-justify lg:pb-24">
             Our target is to create a vibrant online hub where artists can
             showcase their work, and art lovers can discover and support
             creativity effortlessly.
@@ -141,13 +142,13 @@ export default function About() {
 
       <motion.div
         ref={storyContainer}
-        className="w-full h-[25rem] flex justify-center items-center gap-5"
+        className="w-full lg:h-[25rem] h-[30rem] flex flex-col lg:flex-row justify-center items-center gap-5"
       >
         <motion.div
           style={{ y: progress2Value }}
-          className=" h-full flex flex-col justify-center items-left "
+          className=" lg:h-full h-auto flex flex-col justify-center items-start "
         >
-          <h1 className="text-white font-bold tracking-tight text-5xl text-center flex justify-start items-center">
+          <h1 className="text-white font-bold tracking-tight lg:text-5xl text-4xl text-center flex justify-start items-center lg:pb-32">
             <ArrowDownRight color="white" size={64} />
             Our Story
           </h1>
@@ -155,9 +156,9 @@ export default function About() {
 
         <motion.div
           style={{ y: progress2Value }}
-          className="w-1/2 h-[10rem] rounded-xl p-10"
+          className="lg:w-1/2 w-[80%] lg:h-[10rem] h-[20rem] rounded-xl"
         >
-          <p className="text-zinc-500 font-semibold text-justify tracking-tight text-md">
+          <p className="text-zinc-500 font-semibold text-justify tracking-tight ">
             Arteora started as a simple idea in 2022—a passion project by a
             group of friends who wanted to bridge the gap between artists and
             their audiences. After struggling to find platforms that truly
@@ -170,7 +171,7 @@ export default function About() {
 
       <motion.div ref={CTAref} className="flex justify-center items-center gap-10 w-full h-[25rem] ">
         <motion.div
-          className="relative w-[70%] rounded-2xl border border-zinc-800 h-full flex flex-col justify-center items-center p-5  mb-20  bg-cover bg-center bg-no-repeat"
+          className="relative w-[70%] rounded-2xl border border-zinc-800 h-full flex flex-col justify-center items-center p-5  lg:mb-20  bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${Office})`,y:progress3Value }}
         >
           <div className="absolute inset-0 bg-black opacity-50 rounded-2xl"></div>
